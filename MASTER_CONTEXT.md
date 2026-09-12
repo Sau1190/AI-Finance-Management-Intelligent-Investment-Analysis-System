@@ -25,7 +25,7 @@ Deterministic Python/business logic performs calculations, validation, normaliza
 9. System calculates explainable component scores and an overall score.
 10. Explanation engine generates What–How–Why content from verified results.
 11. Dashboard presents tables, charts, warnings, and explanations.
-12. User can export/download an analytical report and Excel workbook.
+12. User can export an analytical report and Excel workbook.
 
 ## 4. Target Users
 - Individual/student investors and learners
@@ -44,22 +44,26 @@ Deterministic Python/business logic performs calculations, validation, normaliza
 - File validation, metadata, processing status
 
 ### Excel Module — IMPORTANT
-Excel is a dedicated project capability, partly to demonstrate practical spreadsheet/data-analysis skills.
+Excel is a dedicated project capability and should demonstrate practical spreadsheet/data-analysis work while remaining directly relevant to financial analysis.
 
 The system should support:
 - XLSX upload and structured extraction
-- Spreadsheet sheet detection
+- Multiple-sheet detection
 - Header/column validation
 - Missing/duplicate-value checks
 - Data-type detection
 - Financial-table normalization
-- Formula-safe processing (never overwrite the source file)
+- Safe handling of formulas and source workbooks (never overwrite the uploaded source)
+- Cleaned-data preview
 - Generated Excel analysis workbook
-- Separate sheets for raw/cleaned data, financial metrics, stock metrics, sentiment, scores, and summary
-- Professional cell formatting, column widths, freeze panes, filters, and basic charts where appropriate
+- Separate sheets for raw data, cleaned data, financial metrics, market/stock metrics, technical indicators, sentiment, scores, and What–How–Why summary
+- Professional formatting: headers, number formats, column widths, freeze panes, filters, conditional formatting where useful, and basic charts where appropriate
 - Excel-ready export of analysis results
 
-Use **Pandas + OpenPyXL** initially. Add XlsxWriter only if advanced output formatting/charts are required.
+Initial libraries:
+- Pandas for reading/processing tabular data
+- OpenPyXL for workbook inspection and editing
+- XlsxWriter may be added only if advanced workbook/chart generation is needed
 
 ### Financial Analysis
 - Revenue
@@ -171,7 +175,7 @@ React Dashboard
 → PostgreSQL
 
 Analysis pipeline:
-Extraction → Cleaning → Validation → Fundamental/Technical/Sentiment/Risk → Scoring → Explanation Engine/LLM → What–How–Why → Dashboard/Report
+Extraction → Cleaning → Validation → Fundamental/Technical/Sentiment/Risk → Scoring → Explanation Engine/LLM → What–How–Why → Dashboard/Report/Excel
 
 ## 9. Financial Calculation Rule
 Financial formulas, ratios, indicators, and score calculations must be deterministic and testable.
@@ -251,6 +255,7 @@ Suggested branches:
 - feature/sentiment
 - feature/scoring
 - feature/dashboard
+- feature/reporting
 
 Commit after each stable milestone.
 
@@ -306,20 +311,26 @@ Goal:
 - Environment configuration
 - Initial tests
 
-## 18. Next Phases
-1. Foundation
-2. File Upload
-3. Extraction + Validation
-4. Fundamental Analysis
-5. Market Integration
-6. Technical Analysis
-7. Sentiment
-8. Explainable Scoring
-9. What–How–Why
-10. Dashboard
-11. Reporting + Excel export
-12. Testing/Evaluation
-13. Documentation/Viva
+## 18. Full Development Roadmap
+1. Requirements and project foundation
+2. Repository/environment setup
+3. File upload and file-management service
+4. Excel/CSV processing and data preview
+5. PDF extraction and document normalization
+6. Data cleaning and validation engine
+7. Fundamental analysis engine
+8. Market-data integration
+9. Technical analysis engine
+10. News and sentiment engine
+11. Explainable scoring engine
+12. What–How–Why explanation engine
+13. React dashboard
+14. Excel/PDF reporting
+15. ML experimentation and evaluation where justified
+16. Authentication, security hardening and permissions
+17. Unit/API/integration/security testing
+18. Deployment
+19. Documentation, diagrams, screenshots and viva preparation
 
 ## 19. Scope Control
 Do NOT add initially:
@@ -332,7 +343,7 @@ Do NOT add initially:
 - many ML models
 - multiple LLMs
 
-Only add future-scope features after the MVP works end-to-end.
+Only add future-scope features after the core MVP works end-to-end.
 
 ## 20. AI Change-Control Rules
 Before major architectural changes, explain:
@@ -355,19 +366,7 @@ At any moment, maintain:
 
 Update these in a handoff/changelog file after meaningful work.
 
-## 22. Project Deadline Mode
-Target completion: **13 September 2026**.
-
-Because development is time-constrained:
-- prioritize a working MVP over optional sophistication
-- avoid unnecessary dependencies
-- build incrementally
-- reuse proven libraries
-- test every milestone
-- defer advanced ML/portfolio features
-- do not spend excessive time polishing architecture that is not needed for the demo/report
-
-## 23. Final MVP Definition
-An AI-assisted financial analysis and investment decision-support platform that accepts structured and semi-structured financial data, extracts and validates it, integrates market/news data, performs fundamental/technical/sentiment analysis, generates an explainable multi-factor score, and presents results through a What–How–Why dashboard plus PDF/Excel-ready analytical reporting.
+## 22. Final MVP Definition
+An AI-assisted financial analysis and investment decision-support platform that accepts structured and semi-structured financial data, including Excel workbooks, extracts and validates it, integrates market/news data, performs fundamental/technical/sentiment analysis, generates an explainable multi-factor score, and presents results through a What–How–Why dashboard plus PDF/Excel-ready analytical reporting.
 
 The system must clearly state that analytical results do not guarantee future stock performance.
