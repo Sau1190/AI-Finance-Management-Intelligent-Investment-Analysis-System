@@ -1,52 +1,52 @@
-# AI Finance Management — Fast Build Roadmap
+# AI Finance Management — Development Roadmap
 
-## PHASE 0 — Foundation
-Repo, environment, FastAPI, React, PostgreSQL, health check.
+## Phase 0 — Requirements + Foundation
+Finalize scope, repository, Python environment, FastAPI, React, PostgreSQL, environment configuration and basic tests.
 
-## PHASE 1 — File + Excel Processing
-CSV/XLSX/PDF upload, metadata, validation, Excel parsing, cleaned dataset preview, Excel export workbook.
+## Phase 1 — File Management
+Implement upload, validation, metadata, safe storage and processing status.
 
-## PHASE 2 — Extraction + Validation
-PDF extraction, financial field mapping, validation statuses, warnings.
+## Phase 2 — Excel + CSV Processing
+Support XLSX/CSV parsing, multiple sheets, column/header detection, data types, missing/duplicate checks, cleaning and preview.
 
-## PHASE 3 — Fundamental Analysis
-Margins, ROE, ROA, current ratio, debt/equity, P/E, growth.
+## Phase 3 — Excel Analysis Export
+Generate professional XLSX workbooks containing raw data, cleaned data, financial metrics, market data, technical indicators, sentiment, scores and What–How–Why summary.
 
-## PHASE 4 — Market Integration
-Start with one market provider + adapter/normalization layer.
+## Phase 4 — PDF Extraction + Validation
+Extract text/tables from PDFs, normalize financial fields, detect warnings and expose validation status.
 
-## PHASE 5 — Technical Analysis
-SMA, EMA, RSI, MACD, volatility and charts.
+## Phase 5 — Fundamental Analysis
+Margins, ROE, ROA, current ratio, debt/equity, P/E where applicable, growth and related metrics.
 
-## PHASE 6 — Sentiment
-One news source + simple positive/neutral/negative baseline.
+## Phase 6 — Market Integration
+Start with one market-data provider and one adapter/normalization layer. Add a news source separately.
 
-## PHASE 7 — Explainable Scoring
-Component scores + configurable weights + evidence trail.
+## Phase 7 — Technical Analysis
+SMA, EMA, RSI, MACD, volatility, price/volume trends and charts.
 
-## PHASE 8 — What–How–Why
-LLM explanation using verified structured results.
+## Phase 8 — Sentiment
+Collect relevant news/headlines and implement a transparent positive/neutral/negative baseline.
 
-## PHASE 9 — Dashboard
-React dashboard combining all modules.
+## Phase 9 — Explainable Scoring
+Create deterministic component scores, configurable weights, evidence trails and risk/warning handling.
 
-## PHASE 10 — Reporting + Excel
-Analytical report + professional XLSX workbook export.
+## Phase 10 — What–How–Why
+Use an LLM to explain verified structured analysis results without changing calculations or scores.
 
-## PHASE 11 — Testing/Evaluation
-Unit, API, integration, extraction, sentiment, scoring/security tests.
+## Phase 11 — Dashboard
+Build the React dashboard with stock overview, charts, metrics, scores, warnings and explanations.
 
-## PHASE 12 — Finalization
-Documentation, diagrams, screenshots, presentation, viva questions.
+## Phase 12 — Reporting
+Add PDF/HTML-style analytical reporting and professional Excel export.
 
-## Deadline strategy
-If time becomes tight, stop adding features and prioritize:
-1. upload
-2. extraction
-3. validation
-4. financial analysis
-5. market data
-6. scoring
-7. dashboard
-8. Excel export
-9. testing
+## Phase 13 — ML Experimentation
+Only where a suitable historical dataset and clearly defined target exist. Compare appropriate models and evaluate with correct metrics. Avoid data leakage.
+
+## Phase 14 — Testing + Security
+Unit, API, integration, file-processing, scoring, authentication and security tests.
+
+## Phase 15 — Deployment + Documentation
+Deployment, README, architecture diagrams, database diagrams, screenshots, final report, presentation and viva preparation.
+
+## Scope Rule
+Build each phase to a stable state before starting the next. Advanced portfolio optimization, automated trading, broker integration, real-time streaming, mobile apps and multiple-LLM architectures remain future scope unless the core system is already complete.

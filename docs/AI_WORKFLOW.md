@@ -3,7 +3,7 @@
 ## Golden Rule
 One AI should not independently redesign the whole project. Keep one approved architecture and use each AI for a defined job.
 
-## Workflow
+## Normal Development Workflow
 YOU → ChatGPT → Research/Design → Cursor → Claude Review → Cursor Fix/Test → GitHub → Next Phase
 
 ## Roles
@@ -16,7 +16,7 @@ YOU → ChatGPT → Research/Design → Cursor → Claude Review → Cursor Fix/
 - GitHub Copilot: optional small coding assistance
 
 ## Handoff Rule
-After each phase create/update `docs/AI_HANDOFF.md` with:
+After each meaningful phase create/update `docs/AI_HANDOFF.md` with:
 - Date
 - Current phase
 - Completed work
@@ -26,6 +26,24 @@ After each phase create/update `docs/AI_HANDOFF.md` with:
 - Known issues
 - Decisions made
 - Next task
+
+## AI Context Rule
+Before asking an AI to modify the project, provide:
+1. `MASTER_CONTEXT.md`
+2. The relevant specification/document for the current task
+3. `docs/AI_HANDOFF.md` if it exists
+
+Do not give every AI permission to redesign the whole system.
+
+## Coding Rule
+Cursor is the primary agent that modifies the production repository during a phase. Other AIs should normally review, research, design, or provide targeted guidance rather than independently replacing the architecture.
+
+## Excel Workflow
+For Excel-related work:
+- ChatGPT defines the required spreadsheet behavior and data model.
+- Cursor implements Pandas/OpenPyXL processing and tests.
+- Claude reviews workbook handling, validation, security and code quality.
+- Generated workbooks are tested with representative XLSX files.
 
 ## Current Handoff
 Phase 0 — Project Foundation
