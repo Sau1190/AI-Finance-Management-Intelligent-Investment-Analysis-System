@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Environment and secrets — never commit real keys
+.env
+.env.local
+
+# Node / frontend
+node_modules/
+frontend/dist/
+
+# Uploads — original files stay on disk, not in git
+backend/storage/uploads/*
+!backend/storage/uploads/.gitkeep
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Generated reports (later phases)
+backend/storage/exports/*
+!backend/storage/exports/.gitkeep
+
+# Generated artifacts (Phases 4-6): extracted PDF text/tables, analysis metrics, market data
+backend/storage/extracts/*
+backend/storage/analysis/*
+backend/storage/market/*

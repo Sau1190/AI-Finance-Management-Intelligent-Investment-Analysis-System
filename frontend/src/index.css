@@ -1,0 +1,57 @@
+:root {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  color: #12202c;
+  background: #f3f6f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: #4b6a7a;
+}
+
+h1 {
+  margin: 0.25rem 0 0.75rem;
+}
+
+.lede {
+  line-height: 1.5;
+  color: #31424d;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #d7e1e7;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.5rem 1rem;
+}
+
+dt {
+  font-weight: 600;
+}
+
+.error {
+  color: #8a1f1f;
+}

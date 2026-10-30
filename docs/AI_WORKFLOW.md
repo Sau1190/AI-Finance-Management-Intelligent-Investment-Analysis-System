@@ -1,52 +1,46 @@
-# AI Tool Workflow — AI Finance Management
+# AI tool workflow
 
-## Golden Rule
-One AI should not independently redesign the whole project. Keep one approved architecture and use each AI for a defined job.
+This project may use several AI tools. Cursor is the **primary coding agent**. Other tools must follow this repository’s docs instead of inventing a new architecture.
 
-## Normal Development Workflow
-YOU → ChatGPT → Research/Design → Cursor → Claude Review → Cursor Fix/Test → GitHub → Next Phase
+## Cursor
 
-## Roles
-- ChatGPT: architecture, requirements, decisions, methodology, report
-- Perplexity: current research and official docs
-- NotebookLM: source-grounded document research
-- Figma: UI/UX
-- Cursor: primary coding agent
-- Claude Code: senior review/security/audit
-- GitHub Copilot: optional small coding assistance
+Create files, edit code, run commands, run tests, implement the **current** phase only.
 
-## Handoff Rule
-After each meaningful phase create/update `docs/AI_HANDOFF.md` with:
-- Date
-- Current phase
-- Completed work
-- Files changed
-- Dependencies added
-- Tests run/results
-- Known issues
-- Decisions made
-- Next task
+## ChatGPT
 
-## AI Context Rule
-Before asking an AI to modify the project, provide:
-1. `MASTER_CONTEXT.md`
-2. The relevant specification/document for the current task
-3. `docs/AI_HANDOFF.md` if it exists
+Architecture, planning, requirements, troubleshooting explanations, report writing, viva preparation.
 
-Do not give every AI permission to redesign the whole system.
+## Claude Code
 
-## Coding Rule
-Cursor is the primary agent that modifies the production repository during a phase. Other AIs should normally review, research, design, or provide targeted guidance rather than independently replacing the architecture.
+Code review, security review, architecture critique — not a second implementer that redesigns the stack.
 
-## Excel Workflow
-For Excel-related work:
-- ChatGPT defines the required spreadsheet behavior and data model.
-- Cursor implements Pandas/OpenPyXL processing and tests.
-- Claude reviews workbook handling, validation, security and code quality.
-- Generated workbooks are tested with representative XLSX files.
+## Figma AI
 
-## Current Handoff
-Phase 0 — Project Foundation
+Wireframes and dashboard UX (later, around Phase 12).
 
-### Next coding task
-Set up the repository, FastAPI backend, React frontend, PostgreSQL connection, environment variables, health endpoint, basic frontend page, and initial tests.
+## Perplexity
+
+Current API and library research. Prefer official docs.
+
+## NotebookLM
+
+Grounded reading of papers/PDFs for the project report.
+
+## GitHub Copilot
+
+Optional local completion. Do not let it add libraries or skip validation.
+
+## Rules every tool must follow
+
+1. One phase at a time.
+2. Do not redesign architecture without explaining why.
+3. Do not add unnecessary libraries.
+4. No advanced ML before the data pipeline works.
+5. No LLM before deterministic analysis works.
+6. Never fabricate financial or market data.
+7. Never hardcode API keys.
+8. Never overwrite uploaded source files.
+9. Prefer small, testable modules.
+10. When uncertain, stop and explain the choice.
+
+After a meaningful task, update `docs/AI_HANDOFF.md`.
