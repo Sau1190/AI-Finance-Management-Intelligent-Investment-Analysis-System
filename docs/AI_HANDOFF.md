@@ -1,7 +1,7 @@
 # AI handoff
 
-- **Date:** 2026-10-27
-- **Current phase:** Phase 9 — Risk analysis (verified complete)
+- **Date:** 2026-11-01
+- **Current phase:** Phase 14 — Testing & security hardening (see `SECURITY_TESTING.md` and the first section below; the full backend pytest suite and `npm run build` were NOT run in the authoring sandbox). Previous: Phase 13 — ML experiments (EXPERIMENTAL, offline only). Before that: Phase 12 — Dashboard, redesigned as a finance workspace (24 unit tests and a 40-step browser test pass against a MOCK API; Vite build, backend suite and live-backend check NOT yet run — see below)
 - **Phase 0 status:** PASS WITH FIXES (see history below).
 - **Phase 1 status:** PASS (see history below).
 - **Phase 2 status:** PASS (see history below).
@@ -18,17 +18,238 @@
 - **Phase 8 status:** PASS (354/354 at completion) with two standing caveats —
   **sentiment accuracy was not measured** and **live news fetching was never
   run** (see the Phase 8 section).
-- **Phase 9 status:** PASS. 412/412 tests pass in a clean virtualenv install
-  (23 Phase 0/1 + 26 Phase 2 + 16 Phase 3 + 22 Phase 4 + 35 Phase 5 + 81 Phase 6
-  + 43 Phase 7 + 108 Phase 8 + 58 Phase 9; one harmless upstream `starlette`
-  deprecation warning). Phase 9 is the current completed phase. The frontend
-  displays backend health only; upload, export, PDF extraction,
-  fundamental-analysis, market-data, technical-analysis, sentiment, and risk
-  controls are not implemented there. Note: the project zip contains no `.git`
-  directory, so no commit was made here — apply these changes to your own
-  repository and commit there.
+- **Phase 9 status:** PASS (412/412 at completion).
+- **Phase 13 status:** harness built; 18/18 harness tests pass (`python -m unittest discover -s ml_experiments/tests -t .` in `backend/`; 8 planted faults all caught). One real-data experiment ran (volatility, GOOG 2004-08, one stock): no ML model clearly beat the persistence baseline. The sentiment experiment has NEVER run on real data (no labelled dataset) - no accuracy exists. **Not run by the assistant:** `python -m pytest` (no FastAPI/SQLAlchemy in the sandbox; `current_phase` and `tests/test_health.py` changed 12 -> 13, please run), the frontend production build and 40-step browser test (frontend untouched; `npm test` re-run: 24/24).
+- **Phase 12 status:** dashboard built and then redesigned as a finance workspace (`frontend/`, `docs/DASHBOARD.md`). Run here and passing: 24/24 frontend unit tests (`npm test`), 40/40 browser steps (headless Chromium, mock API, two consecutive runs of the final source). **Not run:** `npm run build` (Vite), `python -m pytest` (still unconfirmed for Phases 1-11), `start_demo.bat` on Windows, and anything against the real backend or live providers. Do the manual checklist in `docs/DASHBOARD.md` first.
+- **Phase 11 status:** builder logic verified (14/14 framework-free tests run, 5/5 mutations caught). The 9 API tests in `tests/test_explanation.py` and the full pytest suite were **not run** in this session (sandbox had no network, so dependencies could not be installed). Expected total if all pass: 494 + 14 + 9 = 517. Run `python -m pytest` in `backend/` and fix anything that fails before treating Phase 11 as PASS.
+- **Phase 10 status:** PASS, with the standing caveat that the score's anchors
+  and weights are **unvalidated judgement** (see below). 494/494 tests pass in a
+  clean virtualenv install (23 Phase 0/1 + 26 Phase 2 + 16 Phase 3 + 22 Phase 4
+  + 35 Phase 5 + 81 Phase 6 + 43 Phase 7 + 108 Phase 8 + 58 Phase 9 + 82 Phase
+  10; one harmless upstream `starlette` deprecation warning). (Phase 10 was the
+  completed phase at that point.) Note: the
+  project zip contains no `.git` directory, so no commit was made here — apply
+  these changes to your own repository and commit there.
 
-## What changed this session (Phase 9)
+## What changed in Phase 14 (latest session)
+
+Task: Phase 14 only. The first Phase 14 attempt (an earlier chat) ended without saving anything - the
+ZIP handed over was still Phase 13 - so the work was redone from the audit list in that transcript.
+Full detail, per-finding table, checks run/not run and limitations: **`docs/SECURITY_TESTING.md`**.
+
+Added: `core/http_safety.py` (request-size + security-header ASGI middleware), `core/error_envelope.py`
++ `core/error_handlers.py`, `services/db_safety.py`, `services/download_names.py`,
+`services/upload_reader.py`, `tests/test_hardening_units.py` (32 tests), `tests/test_hardening_api.py`
+(7 tests, NOT executed), `frontend/src/lib/crash.js`, `frontend/src/components/ErrorBoundary.jsx`,
+`frontend/tests/hardening.test.js` (9 tests), `docs/SECURITY_TESTING.md`. Changed: `main.py`
+(middleware, tighter CORS, handlers), `config.py` (keys `repr=False`, `current_phase` 14),
+`excel_export.py` (cell cleaning), `export_service.py` / `processing_service.py` (rollback + cleanup +
+unexpected-error handling), `file_processing.py` (`delete_export_artifacts`), `routes/files.py`
+(bounded read), `routes/export.py` (safe download name), logging calls in `fundamental_service.py` /
+`pdf_extraction_service.py`, `frontend/src/api/client.js` (timeouts, unreadable answers),
+`lib/errors.js` (hints), `App.jsx` / `main.jsx` (boundary), `tests/test_health.py` (phase 14).
+No endpoint, table, dependency, dashboard colour or Phase 13 experiment changed.
+
+Run here: 32 new backend logic tests pass (with sandbox-only stubs for pydantic-settings/SQLAlchemy;
+27 planted faults all caught), 18 ML tests, 33 frontend tests, browser test 40/40 on 4 later runs
+(first run 39/40, one unidentified step, not reproduced), real-browser check of the error boundary,
+esbuild production bundle. **Not run:** `python -m pytest` (whole suite), `npm run build`, real
+PostgreSQL, Windows `start_demo.bat`. Owner next steps: run both, tell me any failure in
+`test_hardening_api.py` first. Known gaps: no authentication or rate limiting; unexpected 500s
+lack CORS headers; dependencies not vulnerability-scanned. Phase 15 was NOT started.
+
+## What changed in Phase 13 (previous session)
+
+Task: Phase 13 only - ML experimentation. Owner constraints: deterministic analysis and
+scoring stay the source of truth; ML clearly experimental; no investment recommendations; no
+silent replacement; no invented accuracy; no paid APIs / data leaving the machine; do not
+touch dashboard colours; no Phase 14. Owner reported Phase 12 frontend tests, production
+build and backend tests passed locally (not re-run by the assistant).
+
+Added: `backend/ml_experiments/` (`common.py`, `volatility_experiment.py`,
+`sentiment_experiment.py`, `run.py` CLI, `tests/test_ml_experiments.py` with 18 tests),
+`backend/requirements-ml.txt` (optional, scikit-learn==1.8.0), `docs/ML_EXPERIMENTS.md`
+(scope, data inventory, evaluation, risks, actual results, limitations),
+`docs/ml_results/volatility_goog_demo.json` (the one real-data report). Changed:
+`current_phase` 12 -> 13 (`config.py`, `tests/test_health.py`), `.gitignore` (ml_reports),
+status lines in README / ROADMAP_QUICK / MASTER_CONTEXT / ARCHITECTURE / SENTIMENT_MODULE.
+**No frontend, API route, service, model, table or existing-test logic changed; no new
+runtime dependency in `requirements.txt`.** Experiments live outside `app/` and `tests/`, so
+`python -m pytest` collects exactly what it did before.
+
+Findings: (1) No labelled financial text exists anywhere in the project or sandbox, so the
+sentiment experiment cannot report accuracy; it refuses below 200 rows / 30 per class.
+(2) Volatility on GOOG (963 samples, 630 out-of-sample days): persistence MAE 0.00589 vs
+ridge 0.00615 vs gradient boosting 0.00632 vs historical mean 0.00677; paired 95%
+intervals all include 0 -> no evidence ML adds anything over trailing volatility. One
+stock, one period, untuned: not a general conclusion.
+Test-quality note: two of eight planted faults first escaped the tests (a centred, future-
+peeking window and in-sample predictions) because my own leak tests were too weak; both
+tests were strengthened and all eight are now caught. One new test also had a bug of mine
+(it perturbed the day whose features it was checking) and was corrected.
+
+Owner next steps: run `python -m pytest` in `backend/`; supply a licensed labelled headline
+CSV to measure sentiment accuracy; run the volatility experiment on your own stored
+(adjusted) prices for several symbols before drawing any conclusion. Phase 14 was NOT
+started. Known unchanged gap: Phase 2 still does not recognise a "Total Equity" column.
+
+## What changed in the Phase 12 redesign session (previous)
+
+Task: redesign the Phase 12 frontend as a polished workspace (left sidebar with recent
+activity, chat-app-inspired layout, suggested-action input, results as cards/tables/
+charts) **without** implying a chatbot or any feature that does not exist, using only the
+existing backend APIs. **`backend/` is byte-identical to the uploaded Phase 12 ZIP** (no
+endpoint, schema, model, config or test change); `docs/DASHBOARD.md` was rewritten.
+
+Frontend changes: new shell (`App.jsx`, `components/Sidebar.jsx`, `Composer.jsx`,
+`Icon.jsx`), a new Overview page replacing Home, restyled pages with page headers, score
+ring, sentiment distribution bar and metric tiles, native `<details>` for expandable
+sections, and a rewritten `index.css`. The tab strip became sidebar navigation (names no
+longer carry numbers). New pure modules `lib/nav.js`, `lib/actions.js`, `lib/activity.js`,
+`lib/overview.js`; new hook `useIntent` (lets a suggested action start a workflow on the
+page it opens); `useRequest` now logs user-started runs to the session activity.
+`api/client.js` is unchanged. Suggested actions: Analyze a file, Check sentiment,
+Calculate risk, Score this company, Explain the score; each maps to an existing endpoint
+(table in `DASHBOARD.md`). Market-data and news fetches never start automatically
+(provider quota). The only text input is the symbol; the screen says it is not a chatbot.
+
+Tests actually run (final source, sandbox 2026-10-31): `npm test` 24/24; browser test
+40/40 on two consecutive runs; three planted faults each caught; screenshots reviewed.
+Bugs found by that review and fixed: an overview tile stuck on "Loading…" with no file
+selected, a clipped chip row, hamburger/close buttons visible on desktop (CSS order), a
+duplicated disclaimer lead-in, and a pinned header taking ~25% of a phone screen.
+**Not run:** `npm run build` (Vite not installable offline; an esbuild production bundle
+did succeed, which is only a proxy), `python -m pytest` (no dependencies installable;
+Phase 10/11 totals remain unconfirmed), `start_demo.bat` on Windows, anything against the
+real backend or live providers, Firefox/Safari, real phones. Phase 13 was not started.
+
+## What changed in the first Phase 12 session
+
+
+
+Baseline: the Phase 11 zip delivered in the previous session (no new attachment
+arrived; that zip was the only Phase 11 project on disk). The sandbox again had no
+network, so Python dependencies and Vite could not be installed; React 19.2.5, esbuild,
+Playwright and Chromium were available locally and were used for testing.
+
+Added: the dashboard (`frontend/src/{App.jsx,context.js,api,hooks,lib,components,pages}`),
+`frontend/tests/*.test.js` (13 tests, `npm test`), `frontend/e2e/` (mock API, fixture
+generator that runs the REAL backend calculation code, 31-step browser test),
+`start_demo.bat`, `docs/DASHBOARD.md`. Changed: `current_phase` -> 12
+(`config.py`, `test_health.py`), `.gitignore`, `package.json` (test script only; no new
+dependency), status lines in README/ROADMAP/MASTER_CONTEXT/ARCHITECTURE/
+SCORING_MODULE/EXPLANATION_MODULE. The old health-only `Home.jsx` was replaced.
+No backend endpoint, model, service or database change.
+
+Defects found by testing and fixed: (1) the first sample CSV used "Total Equity",
+which Phase 2 does not recognise, so debt-to-equity silently vanished from the demo
+score (found by the fixture generator's own check; sample now uses "Shareholders
+Equity"); (2) Market tab overflowed a 390px phone screen; (3) numbers split
+mid-word in phone tables; (4) the disclaimer could scroll out of view (now sticky, with a
+test); (5) duplicated component names in the Explain headings; (6) zero-point entries
+in the "most points" lists (hidden in the UI only). One of my own browser tests was
+racy (waited for a transient idle text) and was corrected. A deliberate-breakage run
+showed three of four planted faults caught at first; the fourth (header disclaimer
+removed) was only caught after making the disclaimer sticky and strengthening the test.
+
+Observations for the owner: the Phase 11 backend top-3 driver lists can include
+entries worth 0.0 points (the dashboard hides them); Phase 2 recognises only exact
+column-name variants (e.g. "Equity", "Shareholders Equity"), so real spreadsheets with
+"Total Equity" will lose equity-based ratios until variants are added (not changed here,
+out of scope). **Phase 13 (ML experimentation) was not started.**
+
+## Prior phase notes (Phase 11 session, kept for history)
+
+## What changed this session (Phase 11)
+
+Baseline: the uploaded Phase 10 zip (no `.env`/`.venv`/caches/`.git` inside; its
+own claim of 494 passing could **not** be re-run here for the same no-network
+reason). Added `services/explanation_builder.py` (pure, templates only),
+`services/explanation_service.py`, `schemas/explanation.py`, route
+`GET /api/scores/{symbol}/explanation` (in `routes/scores.py`),
+`tests/test_explanation_builder.py`, `tests/test_explanation.py`,
+`docs/EXPLANATION_MODULE.md`; `current_phase` -> 11 (config + `test_health.py`),
+frontend label, and README/ROADMAP/MASTER_CONTEXT/ARCHITECTURE/SCORING_MODULE
+status lines. No new dependency, no new table, no existing function changed.
+No LLM (project rule: deterministic first; an LLM must not invent numbers).
+One real bug found by the random-input test and fixed: an indicator with a value
+inside an unavailable component has no weight, which crashed the sentence
+template. **Phase 12 (dashboard) was not started.**
+
+## Prior phase notes (Phase 10 session, kept for history)
+
+## What changed this session (Phase 10)
+
+**Baseline provenance.** The request referred to an "attached Phase 9 ZIP", but
+no new attachment appeared in the uploads folder (only the original project zip
+and the old Phase 3 audit zip). The only Phase 9 ZIP on disk was the one
+delivered in the previous session (`AI-Finance-Management-Phase9-Verified.zip`
+in the outputs folder), so that was used, extracted fresh, checked for stray
+`.env`/key files (none), and verified at 412/412 before any change. If you meant
+a different Phase 9 ZIP, re-apply these changes to it.
+
+Phase 10 had no pre-existing code (clean slate). Read first: the roadmap,
+`MASTER_CONTEXT.md` ("educational investment decision-support system"; scoring
+is deterministic Python; an LLM "must not invent numbers... or modify official
+scores"), `AI_WORKFLOW.md`, and each phase's module doc and stored fields.
+Built `scoring_config.py` (the method as versioned data), `scoring_engine.py`
+(pure arithmetic), `scoring_inputs.py` (reads the stored results of Phases
+5/7/8/9), `score_service.py`, a `ScoreResult` model, schemas, and
+`GET /api/scoring-method`, `POST/GET /api/scores/{symbol}`; `current_phase` →
+10; `tests/test_scores.py` (82 tests); `docs/SCORING_MODULE.md`. No new
+dependency; results stored inline; **Phase 11 (What–How–Why) was not started** —
+the result carries the structured explanation (inputs, anchors, sub-scores,
+weights, contributions, reasons, limits), not prose.
+
+Design decisions (all documented in `SCORING_MODULE.md`):
+- **Not advice.** No rating/band/grade/signal/recommendation anywhere; a notice
+  and eight stated limits are in every result (a test checks the keys and the
+  vocabulary). The score is "indicators vs fixed reference ranges I chose".
+- **Only period-independent fundamentals** (net margin, debt/equity,
+  liabilities/assets). Return ratios and growth are excluded because their size
+  depends on annual vs quarterly rows, which the data does not state.
+- **Indicator → 0–100 by linear interpolation between a poor and a good anchor,
+  clamped**, with `saturated` reported; equal weights within a component; equal
+  component weights (25%) by default, as a no-information prior; user weights
+  allowed (validated, normalised, stored, flagged).
+- **Missing data is excluded and explained, never filled in or treated as 0/50.**
+  Component minimums (2 of 3 / 1 of 2 / 1 of 1 / 2 of 3; sentiment needs ≥ 5
+  scored texts); overall needs ≥ 2 components and ≥ 50% of the weight (both are
+  my judgement). Older periods are never substituted for a missing latest one.
+- **Explicit input-choice rules** (latest COMPLETE result per phase; fundamentals
+  matched by `ticker` column, `company` only if single-entity; latest period by
+  date; ambiguous latest period refused; several worksheets require
+  `sheet_name`). Consistency warnings for different price snapshots, different
+  as-of dates, and any upstream warning (Phase 9's possible-split warning is
+  passed through, values used as stored).
+- Every result stores the upstream result ids, the weights used, and a snapshot
+  of the method, so it stays reproducible if `scoring_config.py` changes.
+
+Verification: hand-computed worked examples; an independent oracle in the test
+file (shares no code with the engine) agreeing on 400 seeded random inputs with
+random missing data and weights, and recomputing a full score from raw upstream
+numbers through the real pipeline to 1e-9; properties (0–100 bounds, improving a
+favourable input never lowers the score, contributions sum exactly). **Thirteen
+mutations were each caught.** Finding: the first draft of the suite passed 82/82
+on its first run, which was treated as a warning — review found one vacuous
+assertion (`… is False or True`) and one too-lenient one; both were replaced
+before mutation testing.
+
+**Caveat — the score is unvalidated.** Anchors, thresholds, and equal weights
+are illustrative judgement. There is no outcome data in this project, so no
+backtest or calibration was possible, and none is claimed. The tests prove the
+score is computed exactly as documented and fully explainable, not that it is
+meaningful. Scores are comparable only when `contributing_components` and
+`weights` match. Every earlier caveat still applies underneath it (live price and
+news data never fetched; sentiment accuracy unmeasured; unadjusted prices).
+
+Flags: no frontend; no score history or cross-symbol comparison; inputs are not
+age-discounted; fundamentals need an uploaded file with a ticker column (or a
+single company); `market_storage.py`, `analysis_storage.py` and
+`pdf_extraction.py` still contain near-identical write/rollback helpers; the
+Phase 3 `n/a`-becomes-blank issue is still open.
+
+## What changed in Phase 9 (previous session)
 
 Phase 9 had no pre-existing code (clean slate). Built `risk_metrics.py` (pure
 maths), `risk_report.py` (explainable report), `risk_service.py`, a
@@ -383,7 +604,7 @@ Modified: `backend/requirements.txt`, `backend/app/core/config.py`,
 
 ## Next phase
 
-**Phase 10 — Explainable scoring.** Not started. Do not begin without explicit instruction.
+**Phase 13 — ML experimentation.** Not started. Do not begin without explicit instruction. First run the full backend suite (`python -m pytest` in `backend/`), confirm the Phase 11 API tests pass, and complete the live-backend checklist in `docs/DASHBOARD.md`.
 
 ---
 

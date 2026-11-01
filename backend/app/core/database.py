@@ -75,6 +75,7 @@ def init_db() -> None:
     from app.models import pdf_extraction_result as _pdf_extraction_result  # noqa: F401
     from app.models import processing_result as _processing_result  # noqa: F401
     from app.models import risk_analysis_result as _risk_analysis_result  # noqa: F401
+    from app.models import score_result as _score_result  # noqa: F401
     from app.models import sentiment_result as _sentiment_result  # noqa: F401
     from app.models import uploaded_file as _uploaded_file  # noqa: F401
 

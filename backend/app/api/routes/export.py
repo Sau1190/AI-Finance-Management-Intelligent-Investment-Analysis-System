@@ -13,6 +13,7 @@ from app.core.database import get_db
 from app.core.exceptions import AppError, FileIntakeError, ProcessingRequestError
 from app.schemas.export import ExportResultResponse
 from app.services import export_service, file_processing, file_service
+from app.services.download_names import safe_download_filename
 
 router = APIRouter(prefix="/files/{file_id}/export", tags=["export"])
 
@@ -83,5 +84,5 @@ def download_export(file_id: str, db: Session = Depends(get_db)) -> FileResponse
     return FileResponse(
         path,
         media_type=XLSX_MEDIA_TYPE,
-        filename=result.original_filename or "export.xlsx",
+        filename=safe_download_filename(result.original_filename),
     )

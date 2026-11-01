@@ -18,6 +18,8 @@ from fastapi.responses import JSONResponse
 from app.api.router import api_router
 from app.core.config import get_settings
 from app.core.database import init_db
+from app.core.error_handlers import register_error_handlers
+from app.core.http_safety import RequestSizeLimitMiddleware, SecurityHeadersMiddleware
 
 settings = get_settings()
 
@@ -43,13 +45,41 @@ app = FastAPI(
     ),
 )
 
+# Phase 14 hardening. Middleware order (last added = outermost):
+#   SecurityHeaders -> CORS -> RequestSizeLimit -> routes
+# so every answer (including CORS preflights and size refusals) carries the
+# hardening headers, and a refusal still gets CORS headers the browser can read.
+
+# Multipart framing around an upload (boundaries, part headers) - generous but bounded.
+MULTIPART_OVERHEAD_BYTES = 64 * 1024
+# Every non-upload body (sentiment texts are the largest: 100 x 2000 characters).
+MAX_JSON_BODY_BYTES = 2 * 1024 * 1024
+
+
+def request_size_rule(scope) -> tuple[int, str, str] | None:
+    """Per-request body limit, read from settings each time so the upload
+    ceiling stays configurable (MAX_UPLOAD_BYTES) and testable."""
+    if scope.get("method") == "POST" and scope.get("path", "").rstrip("/") == "/api/files":
+        limit = get_settings().max_upload_bytes + MULTIPART_OVERHEAD_BYTES
+        return limit, "FILE_TOO_LARGE", "The upload is larger than the maximum allowed size."
+    return MAX_JSON_BODY_BYTES, "REQUEST_TOO_LARGE", "The request body is too large."
+
+
+app.add_middleware(RequestSizeLimitMiddleware, limit_for=request_size_rule)
+
+# The API uses no cookies or sessions, so credentialed CORS is switched off, and
+# only the methods/headers the dashboard really uses are allowed. A wildcard
+# origin in CORS_ORIGINS is ignored (explicit origins only).
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origin_list,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=[origin for origin in settings.cors_origin_list if origin != "*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Accept"],
 )
+app.add_middleware(SecurityHeadersMiddleware)
+
+register_error_handlers(app)
 
 app.include_router(api_router, prefix="/api")
 

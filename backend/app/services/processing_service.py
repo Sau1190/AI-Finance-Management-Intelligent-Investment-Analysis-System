@@ -16,7 +16,7 @@ from app.core.config import get_settings
 from app.core.exceptions import ProcessingRequestError
 from app.models.processing_result import ProcessingResult, ProcessingRunStatus
 from app.models.uploaded_file import UploadedFile
-from app.services import data_quality, file_processing, file_storage
+from app.services import data_quality, db_safety, file_processing, file_storage
 from app.services.financial_normalization import build_normalization_mapping
 
 logger = logging.getLogger(__name__)
@@ -127,7 +127,7 @@ def _process_sheet(sheet_name: str, raw: pd.DataFrame, *, csv_delimiter: str | N
         report["cleaned_data_status"] = "GENERATED"
         report["cleaned_data_storage_key"] = storage_key
     except ProcessingRequestError as exc:
-        logger.exception("Failed to write cleaned data for sheet %s", sheet_name)
+        logger.error("Failed to write cleaned data for sheet %s: %s", sheet_name, exc.code)
         report["cleaned_data_status"] = "FAILED"
         report["errors"].append(exc.message)
 
@@ -171,9 +171,18 @@ def process_uploaded_file(db: Session, uploaded_file: UploadedFile) -> Processin
             raw, delimiter = file_processing.read_csv_raw(content)
             worksheets.append(_process_sheet("csv", raw, csv_delimiter=delimiter))
     except file_processing.UnreadableFileError as exc:
-        logger.exception("Could not read uploaded file %s for processing", uploaded_file.id)
+        logger.error("Could not read uploaded file %s for processing: %s", uploaded_file.id, type(exc).__name__)
         status = ProcessingRunStatus.FAILED.value
         error_message = "The file could not be read. It may be corrupted or use an unsupported structure."
+        file_processing.delete_export_artifacts(_artifact_keys(worksheets))
+        worksheets = []
+    except Exception as exc:  # noqa: BLE001 - an unexpected pipeline error is a FAILED run, not a 500
+        # Log the TYPE only: parser messages can quote uploaded cell content.
+        logger.error("Unexpected processing failure for file %s: %s", uploaded_file.id, type(exc).__name__)
+        status = ProcessingRunStatus.FAILED.value
+        error_message = "The file could not be processed because of an unexpected error."
+        # All-or-nothing: cleaned CSVs already written for earlier sheets must not be orphaned.
+        file_processing.delete_export_artifacts(_artifact_keys(worksheets))
         worksheets = []
 
     # Original file is only ever opened for reading above — never written to.
@@ -183,10 +192,17 @@ def process_uploaded_file(db: Session, uploaded_file: UploadedFile) -> Processin
         error_message=error_message,
         worksheets=worksheets,
     )
-    db.add(record)
-    db.commit()
-    db.refresh(record)
-    return record
+    # If the row cannot be saved, the cleaned CSVs written for it must not be left behind.
+    return db_safety.commit_or_cleanup(
+        db,
+        record,
+        error_cls=ProcessingRequestError,
+        cleanup=lambda: file_processing.delete_export_artifacts(_artifact_keys(worksheets)),
+    )
+
+
+def _artifact_keys(worksheets: list[dict]) -> list[str]:
+    return [w["cleaned_data_storage_key"] for w in worksheets if w.get("cleaned_data_storage_key")]
 
 
 def get_latest_result(db: Session, file_id: str) -> ProcessingResult | None:

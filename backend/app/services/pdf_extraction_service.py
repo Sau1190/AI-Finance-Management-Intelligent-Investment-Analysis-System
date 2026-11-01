@@ -115,8 +115,8 @@ def extract_pdf(db: Session, uploaded_file: UploadedFile) -> PdfExtractionResult
     except pdf_extraction.EncryptedPdfError:
         status = ExtractionRunStatus.FAILED.value
         error_message = "This PDF is password-protected and cannot be extracted."
-    except pdf_extraction.UnreadablePdfError:
-        logger.exception("Could not read uploaded file %s for extraction", uploaded_file.id)
+    except pdf_extraction.UnreadablePdfError as exc:
+        logger.error("Could not read uploaded file %s for extraction: %s", uploaded_file.id, type(exc).__name__)
         status = ExtractionRunStatus.FAILED.value
         error_message = "The PDF could not be read. It may be corrupted or use an unsupported structure."
 
@@ -136,14 +136,14 @@ def extract_pdf(db: Session, uploaded_file: UploadedFile) -> PdfExtractionResult
                         page_number = index + 1
                         extracted = pdf_extraction.extract_page(doc[index])
                         pages.append(_build_page_report(page_number, extracted, written_keys))
-                except ExtractionRequestError:
-                    logger.exception("Storage failure while extracting page %s of file %s", page_number, uploaded_file.id)
+                except ExtractionRequestError as exc:
+                    logger.error("Storage failure while extracting page %s of file %s: %s", page_number, uploaded_file.id, exc.code)
                     failure_message = (
                         f"EXTRACTION_STORAGE_FAILURE: could not save extracted content for page "
                         f"{page_number}. No extraction results were kept."
                     )
-                except Exception:  # noqa: BLE001 — never leave a half-written run behind
-                    logger.exception("Unexpected failure while extracting page %s of file %s", page_number, uploaded_file.id)
+                except Exception as exc:  # noqa: BLE001 — never leave a half-written run behind
+                    logger.error("Unexpected failure while extracting page %s of file %s: %s", page_number, uploaded_file.id, type(exc).__name__)
                     failure_message = (
                         f"The PDF could not be fully extracted (failed on page {page_number}). "
                         "No extraction results were kept."

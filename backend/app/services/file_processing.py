@@ -13,6 +13,7 @@ Technical view:
 
 import csv
 import io
+import logging
 from pathlib import Path
 from uuid import uuid4
 
@@ -20,6 +21,8 @@ import pandas as pd
 
 from app.core.config import get_settings
 from app.core.exceptions import ProcessingRequestError
+
+logger = logging.getLogger(__name__)
 
 CANDIDATE_CSV_DELIMITERS = [",", ";", "\t", "|"]
 DEFAULT_CSV_DELIMITER = ","
@@ -110,6 +113,24 @@ def exports_directory() -> Path:
     path = Path(get_settings().exports_dir)
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def delete_export_artifacts(storage_keys: list[str]) -> list[str]:
+    """Best-effort rollback of generated files in storage/exports/ (cleaned CSVs,
+    workbooks). Never raises; returns the keys it could not remove. Only the
+    file-name part of a key is used, so a key can never address anything
+    outside the exports directory."""
+    directory = exports_directory()
+    not_removed: list[str] = []
+    for key in storage_keys:
+        if not key:
+            continue
+        try:
+            (directory / Path(key).name).unlink(missing_ok=True)
+        except OSError:
+            logger.error("Could not remove generated artifact %s", Path(key).name)
+            not_removed.append(key)
+    return not_removed
 
 
 def save_export_workbook(content: bytes) -> tuple[str, str]:

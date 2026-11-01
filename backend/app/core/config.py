@@ -53,15 +53,16 @@ class Settings(BaseSettings):
     market_data_timeout_seconds: float = Field(
         default=10.0, description="Per-request timeout for market data providers."
     )
-    alpha_vantage_api_key: str = ""
+    # repr=False: a key must never show up if someone prints/logs the settings object.
+    alpha_vantage_api_key: str = Field(default="", repr=False)
     news_provider: str = Field(
         default="newsapi", description="Which news adapter to use. Only 'newsapi' is implemented."
     )
     news_timeout_seconds: float = Field(default=10.0, description="Per-request timeout for news providers.")
     news_page_size: int = Field(default=50, ge=1, le=100, description="Articles requested per news fetch.")
-    news_api_key: str = ""
-    llm_api_key: str = ""
-    current_phase: int = Field(default=9, description="Development phase marker for health responses.")
+    news_api_key: str = Field(default="", repr=False)
+    llm_api_key: str = Field(default="", repr=False)
+    current_phase: int = Field(default=14, description="Development phase marker for health responses.")
 
     @property
     def cors_origin_list(self) -> list[str]:

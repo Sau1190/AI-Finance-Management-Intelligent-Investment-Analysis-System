@@ -1,0 +1,137 @@
+{
+  "data_source": {
+    "load_info": {
+      "dataset": "matplotlib sample_data goog.npz (adjusted close)",
+      "dropped": {
+        "duplicate_date": 0,
+        "non_positive_or_non_numeric_price": 0,
+        "unparseable_date": 0
+      },
+      "first_date": "2004-08-19",
+      "last_date": "2008-10-14",
+      "max_gap_days": 5,
+      "rows_read": 1047,
+      "rows_used": 1047
+    },
+    "name": "matplotlib sample_data goog.npz (adjusted close)",
+    "sha256_of_cleaned_rows": "af18e5a4ab4a06661f06c6488fd85e2791f11833d02ed906cb1f945ff7ee8293",
+    "usable_samples": 963
+  },
+  "data_warnings": [],
+  "environment": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "python": "3.12.3",
+    "scikit_learn": "1.8.0"
+  },
+  "experiment": "volatility_forecast",
+  "experimental": true,
+  "generated_at_utc": "2026-11-01T09:54:16+00:00",
+  "limitations": [
+    "The result describes this dataset and period only; it is not evidence about other stocks or other years.",
+    "Hyperparameters are fixed, not tuned; a different configuration could change the ranking.",
+    "Forecasts use closing prices only; no volume, news, fundamentals or market-wide data.",
+    "Unadjusted prices make splits look like crashes; flagged jumps are reported, never silently removed.",
+    "Volatility is a statistical description of past price movement, not a measure of whether an investment is good or bad."
+  ],
+  "notice": "EXPERIMENTAL. Offline research output, not part of the scoring system. Not investment advice, not a recommendation, not a forecast of returns. It does not replace or alter any stored analysis or score.",
+  "parameters": {
+    "feature_windows": [
+      5,
+      21,
+      63
+    ],
+    "features": [
+      "log_vol_5",
+      "log_vol_21",
+      "log_vol_63",
+      "log_abs_return_1d",
+      "return_5d",
+      "return_21d"
+    ],
+    "gradient_boosting": {
+      "learning_rate": 0.05,
+      "max_depth": 2,
+      "n_estimators": 100,
+      "subsample": 0.8
+    },
+    "horizon_days": 21,
+    "min_total_samples": 750,
+    "min_train_samples": 252,
+    "models": [
+      "persistence",
+      "historical_mean",
+      "ridge",
+      "gradient_boosting"
+    ],
+    "ridge_alpha": 1.0,
+    "target": "std of next 21 daily log returns",
+    "test_block_samples": 63,
+    "tuning": "none (fixed settings)"
+  },
+  "results": {
+    "metric_notes": {
+      "interval": "95% moving-block bootstrap, block = 21 samples",
+      "mae/rmse": "on the volatility scale (daily std of log returns); lower is better",
+      "mae_log": "mean absolute error of log volatility; lower is better",
+      "qlike": "standard volatility-forecast loss; lower is better"
+    },
+    "metrics_by_model": {
+      "gradient_boosting": {
+        "mae": 0.0063223111273689805,
+        "mae_log": 0.3218203088521413,
+        "qlike": 0.3786435451085728,
+        "rmse": 0.008359437214057075
+      },
+      "historical_mean": {
+        "mae": 0.006765338360838032,
+        "mae_log": 0.348193441111731,
+        "qlike": 0.414497697335483,
+        "rmse": 0.008707806182930612
+      },
+      "persistence": {
+        "mae": 0.005889573688722989,
+        "mae_log": 0.2885194748669084,
+        "qlike": 0.30749817557169734,
+        "rmse": 0.008231620761499742
+      },
+      "ridge": {
+        "mae": 0.006153184821953142,
+        "mae_log": 0.3113648289109676,
+        "qlike": 0.3767323770790325,
+        "rmse": 0.008147826242601418
+      }
+    },
+    "n_folds": 10,
+    "n_test_samples": 630,
+    "paired_comparison_vs_persistence": {
+      "gradient_boosting": {
+        "ci95_high": 0.11454014054524947,
+        "ci95_low": -0.04595720327683209,
+        "mean_abs_log_error_difference_vs_persistence": 0.03330083398523296,
+        "negative_means_model_better": true,
+        "verdict": "no clear difference from persistence (interval includes 0)"
+      },
+      "historical_mean": {
+        "ci95_high": 0.15073091617817394,
+        "ci95_low": -0.02706010790415785,
+        "mean_abs_log_error_difference_vs_persistence": 0.059673966244822636,
+        "negative_means_model_better": true,
+        "verdict": "no clear difference from persistence (interval includes 0)"
+      },
+      "ridge": {
+        "ci95_high": 0.09849352970301575,
+        "ci95_low": -0.04260938164152597,
+        "mean_abs_log_error_difference_vs_persistence": 0.02284535404405927,
+        "negative_means_model_better": true,
+        "verdict": "no clear difference from persistence (interval includes 0)"
+      }
+    },
+    "test_period": {
+      "first": "2005-12-16",
+      "last": "2008-06-19"
+    }
+  },
+  "seed": 20260101,
+  "status": "completed"
+}

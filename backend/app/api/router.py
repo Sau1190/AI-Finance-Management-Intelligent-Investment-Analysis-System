@@ -9,6 +9,7 @@ from app.api.routes import (
     market_data,
     processing,
     risk,
+    scores,
     sentiment,
     technical,
 )
@@ -24,3 +25,5 @@ api_router.include_router(market_data.router)
 api_router.include_router(technical.router)
 api_router.include_router(sentiment.router)
 api_router.include_router(risk.router)
+api_router.include_router(scores.router)
+api_router.include_router(scores.method_router)

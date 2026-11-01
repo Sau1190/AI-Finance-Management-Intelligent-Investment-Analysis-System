@@ -9,13 +9,14 @@ format is real: the original raw grid, Phase 2's cleaned/normalized data,
 and Phase 2's data-quality findings.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from decimal import Decimal, InvalidOperation
 from io import BytesIO
 import math
 
 import pandas as pd
 from openpyxl import Workbook
+from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 from openpyxl.chart import BarChart, Reference
 from openpyxl.formatting.rule import FormulaRule
 from openpyxl.styles import Alignment, Font, PatternFill
@@ -35,6 +36,39 @@ _NUMBER_FORMATS = {
 }
 
 _INVALID_SHEET_CHARS = set(r"[]:*?/\\")
+
+# Phase 14: what a workbook cell can actually hold. Excel/openpyxl refuse control
+# characters (e.g. \x0b, \x01) - openpyxl raises IllegalCharacterError, which
+# used to turn a perfectly ordinary export into a server error - and a cell
+# longer than 32,767 characters makes Excel report the file as corrupt.
+MAX_CELL_CHARS = 32_767
+REPLACEMENT_CHAR = "\ufffd"
+
+
+def _cell_needs_cleaning(value) -> bool:
+    return isinstance(value, str) and (len(value) > MAX_CELL_CHARS or ILLEGAL_CHARACTERS_RE.search(value) is not None)
+
+
+def clean_cell_text(value):
+    """Make a string storable in a workbook cell. Non-strings pass through.
+    Characters Excel cannot store are replaced with U+FFFD (visibly, never
+    silently dropped) and over-long text is cut at the Excel limit. Callers
+    report how many cells were changed (see build_workbook)."""
+    if not isinstance(value, str):
+        return value
+    cleaned = ILLEGAL_CHARACTERS_RE.sub(REPLACEMENT_CHAR, value)
+    return cleaned[:MAX_CELL_CHARS]
+
+
+def _count_unsafe_cells(frame: pd.DataFrame | None) -> int:
+    if frame is None or (frame.empty and len(frame.columns) == 0):
+        return 0
+    count = sum(1 for column in frame.columns if _cell_needs_cleaning(str(column)))
+    for column in frame.columns:
+        series = frame[column]
+        if series.dtype == object or str(series.dtype).startswith("str"):
+            count += int(sum(1 for v in series if _cell_needs_cleaning(v)))
+    return count
 
 
 @dataclass
@@ -61,7 +95,11 @@ class WorksheetExport:
 
 def _safe_sheet_title(name: str, used: set[str]) -> str:
     """Excel sheet names: <=31 chars, no [ ] : * ? / \\, unique per workbook."""
-    cleaned = "".join(ch for ch in name if ch not in _INVALID_SHEET_CHARS).strip() or "Sheet"
+    cleaned = "".join(
+        ch for ch in clean_cell_text(name) if ch not in _INVALID_SHEET_CHARS and ch != REPLACEMENT_CHAR
+    )
+    # Excel also rejects names that begin or end with an apostrophe.
+    cleaned = cleaned.strip().strip("'").strip() or "Sheet"
     base = cleaned[:31]
     candidate = base
     suffix = 1
@@ -92,7 +130,7 @@ def _append_literal_row(ws: Worksheet, values: list) -> None:
     openpyxl treats strings beginning with ``=`` as formulas by default.
     Uploaded cell values and headers must remain data when exported.
     """
-    ws.append(values)
+    ws.append([clean_cell_text(v) for v in values])
     for cell in ws[ws.max_row]:
         if isinstance(cell.value, str):
             cell.data_type = "s"
@@ -105,7 +143,7 @@ def _write_summary_sheet(wb: Workbook, worksheets: list[WorksheetExport], proces
     if processing_failed_note:
         ws["A1"] = "Processing did not complete for this file"
         ws["A1"].font = Font(bold=True)
-        ws["A2"] = processing_failed_note
+        ws["A2"] = clean_cell_text(processing_failed_note)
         ws["A2"].data_type = "s"
         ws.column_dimensions["A"].width = 100
         return
@@ -233,6 +271,7 @@ def build_workbook(
     """Assemble the full export workbook and return its bytes. Sheet order:
     Summary, then Raw/Cleaned pairs per worksheet in processing order.
     """
+    worksheets = [_with_cleaning_warning(sheet) for sheet in worksheets]
     wb = Workbook()
     _write_summary_sheet(wb, worksheets, processing_failed_note)
 
@@ -248,6 +287,19 @@ def build_workbook(
     buffer = BytesIO()
     wb.save(buffer)
     return buffer.getvalue()
+
+
+def _with_cleaning_warning(sheet: WorksheetExport) -> WorksheetExport:
+    """If any cell of this worksheet had to be altered to fit a workbook, say so
+    in its warnings (shown as a count in the Summary sheet's Warnings column)."""
+    changed = _count_unsafe_cells(sheet.raw_df) + _count_unsafe_cells(sheet.cleaned_df)
+    if not changed:
+        return sheet
+    note = (
+        f"{changed} cell(s) held characters Excel cannot store or text longer than {MAX_CELL_CHARS} "
+        f"characters; they were replaced with a visible marker or shortened in this export."
+    )
+    return replace(sheet, warnings=[*sheet.warnings, note])
 
 
 def get_workbook_sheet_names(worksheets: list[WorksheetExport]) -> list[str]:

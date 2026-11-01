@@ -8,6 +8,7 @@ professional-looking export.
 """
 
 import logging
+from pathlib import Path
 
 import pandas as pd
 from sqlalchemy.orm import Session
@@ -15,7 +16,8 @@ from sqlalchemy.orm import Session
 from app.core.exceptions import ProcessingRequestError
 from app.models.export_result import ExportResult, ExportRunStatus
 from app.models.uploaded_file import UploadedFile
-from app.services import excel_export, file_processing, file_storage
+from app.services import db_safety, excel_export, file_processing, file_storage
+from app.services.download_names import build_export_filename
 from app.services.processing_service import get_latest_result
 
 logger = logging.getLogger(__name__)
@@ -27,7 +29,9 @@ def _read_cleaned_df(storage_key: str) -> pd.DataFrame | None:
     should not prevent exporting the raw data and summary that are still
     available.
     """
-    path = file_processing.exports_directory() / storage_key.removeprefix("exports/")
+    # Only the file-name part of the key is used (like every other artifact reader),
+    # so a stored key can never point outside the exports directory.
+    path = file_processing.exports_directory() / Path(storage_key).name
     try:
         return pd.read_csv(path, dtype=str)
     except OSError:
@@ -131,31 +135,41 @@ def export_uploaded_file(db: Session, uploaded_file: UploadedFile) -> ExportResu
     except ProcessingRequestError as exc:
         if exc.code == "PROCESSING_RESULT_NOT_FOUND":
             raise
-        logger.exception("Export failed for file %s", uploaded_file.id)
-        record = ExportResult(
-            file_id=uploaded_file.id,
-            processing_result_id=latest.id,
-            status=ExportRunStatus.FAILED.value,
-            error_message=exc.message,
-            sheet_names=[],
+        logger.error("Export failed for file %s: %s", uploaded_file.id, exc.code)
+        return _save_failed_export(db, uploaded_file, latest, exc.message)
+    except Exception as exc:  # noqa: BLE001 - an unexpected build error is a FAILED export, not a 500
+        # Log the TYPE only: parser/writer messages can quote uploaded cell content.
+        logger.error("Unexpected export failure for file %s: %s", uploaded_file.id, type(exc).__name__)
+        return _save_failed_export(
+            db, uploaded_file, latest, "The export could not be built because of an unexpected error."
         )
-        db.add(record)
-        db.commit()
-        db.refresh(record)
-        return record
 
     record = ExportResult(
         file_id=uploaded_file.id,
         processing_result_id=latest.id,
         status=ExportRunStatus.COMPLETE.value,
         storage_key=storage_key,
-        original_filename=f"{uploaded_file.original_filename}-export.xlsx",
+        original_filename=build_export_filename(uploaded_file.original_filename),
         sheet_names=sheet_names,
     )
-    db.add(record)
-    db.commit()
-    db.refresh(record)
-    return record
+    # If the row cannot be saved, the workbook just written must not be left behind.
+    return db_safety.commit_or_cleanup(
+        db,
+        record,
+        error_cls=ProcessingRequestError,
+        cleanup=lambda: file_processing.delete_export_artifacts([storage_key]),
+    )
+
+
+def _save_failed_export(db: Session, uploaded_file: UploadedFile, latest, message: str) -> ExportResult:
+    record = ExportResult(
+        file_id=uploaded_file.id,
+        processing_result_id=latest.id,
+        status=ExportRunStatus.FAILED.value,
+        error_message=message,
+        sheet_names=[],
+    )
+    return db_safety.commit_or_cleanup(db, record, error_cls=ProcessingRequestError)
 
 
 def get_latest_export(db: Session, file_id: str) -> ExportResult | None:

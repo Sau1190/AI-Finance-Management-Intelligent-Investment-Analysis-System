@@ -1,0 +1,5 @@
+# Phase 13 - OPTIONAL, EXPERIMENTAL ML research tooling. Not needed to run the app.
+# Install only if you want to run backend/ml_experiments (offline; no network access at runtime).
+# These are the versions the experiments were actually run with.
+-r requirements.txt
+scikit-learn==1.8.0

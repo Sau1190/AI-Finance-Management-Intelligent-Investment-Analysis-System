@@ -3,10 +3,12 @@
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from sqlalchemy.orm import Session
 
+from app.core.config import get_settings
 from app.core.database import get_db
 from app.core.exceptions import FileIntakeError
 from app.schemas.files import UploadedFileListResponse, UploadedFileResponse
 from app.services import file_service
+from app.services.upload_reader import read_upload_limited
 
 router = APIRouter(prefix="/files", tags=["files"])
 
@@ -20,7 +22,12 @@ async def upload_file(
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
 ) -> UploadedFileResponse:
-    content = await file.read()
+    # Phase 14: never materialise more than the allowed size (the validator still
+    # enforces the exact limit and the content checks).
+    try:
+        content = await read_upload_limited(file, get_settings().max_upload_bytes)
+    except FileIntakeError as exc:
+        _raise_http(exc)
     try:
         record = file_service.ingest_upload(
             db,

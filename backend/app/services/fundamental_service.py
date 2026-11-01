@@ -125,14 +125,14 @@ def analyze_fundamentals(db: Session, uploaded_file: UploadedFile) -> Fundamenta
         try:
             for position, processing_report in enumerate(processing.worksheets, start=1):
                 worksheets.append(_analyze_worksheet(processing_report, written_keys))
-        except AnalysisRequestError:
-            logger.exception("Storage failure analyzing worksheet %s of file %s", position, uploaded_file.id)
+        except AnalysisRequestError as exc:
+            logger.error("Storage failure analyzing worksheet %s of file %s: %s", position, uploaded_file.id, exc.code)
             failure_message = (
                 f"ANALYSIS_STORAGE_FAILURE: could not save analysis metrics for worksheet #{position}. "
                 "No analysis results were kept."
             )
-        except Exception:  # noqa: BLE001 — never leave a half-written run behind
-            logger.exception("Unexpected failure analyzing worksheet %s of file %s", position, uploaded_file.id)
+        except Exception as exc:  # noqa: BLE001 — never leave a half-written run behind
+            logger.error("Unexpected failure analyzing worksheet %s of file %s: %s", position, uploaded_file.id, type(exc).__name__)
             failure_message = (
                 f"The analysis failed on worksheet #{position}. No analysis results were kept."
             )

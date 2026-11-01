@@ -3,7 +3,7 @@
 Scores the sentiment of financial headlines/text with a **deterministic,
 explainable word-list method**. Every score can be traced to the exact words
 and phrases that produced it. No LLM, no machine-learning model, no new
-dependency (ML sentiment is Phase 13; LLM wording of explanations is Phase 11).
+dependency (an ML comparison harness exists in Phase 13 (`docs/ML_EXPERIMENTS.md`) but has never been run on real labelled data, so accuracy is still unmeasured; LLM wording of explanations is Phase 11).
 
 > **Read this before trusting the numbers.**
 > 1. **Accuracy has not been measured.** The word list is a small, hand-written

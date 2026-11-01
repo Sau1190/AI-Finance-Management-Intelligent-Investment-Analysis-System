@@ -36,3 +36,12 @@ backend/storage/exports/*
 backend/storage/extracts/*
 backend/storage/analysis/*
 backend/storage/market/*
+
+# Phase 12 dashboard
+frontend/.e2e-dist/
+frontend/node_modules/
+backend/demo.db
+backend/*.db
+
+# Phase 13 ML experiment reports are generated locally (the curated demo report lives in docs/ml_results/)
+backend/storage/ml_reports/*

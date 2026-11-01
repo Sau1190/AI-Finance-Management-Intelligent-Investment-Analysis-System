@@ -1,0 +1,5293 @@
+{
+ "sample_csv": "Date,Ticker,Revenue,Net Income,Total Assets,Total Liabilities,Shareholders Equity,Total Debt\n2022-12-31,AAA,1000,120,5000,2750,2250,900\n2023-12-31,AAA,1150,150,5400,2900,2500,950\n2024-12-31,AAA,1300,170,5900,3100,2800,1000\n",
+ "headlines": [
+  "AAA beats earnings estimates and raises full-year guidance",
+  "AAA reports record revenue growth in the latest quarter",
+  "Analysts upgrade AAA after strong profit increase",
+  "AAA faces lawsuit and shares fall on weak outlook",
+  "AAA misses revenue estimates as costs rise",
+  "AAA announces dividend increase after solid results"
+ ],
+ "sheet": {
+  "sheet_name": "sample_financials_AAA",
+  "status": "ANALYZED",
+  "reason": null,
+  "row_count": 3,
+  "recognized_concepts": [
+   "date",
+   "ticker",
+   "revenue",
+   "net_income",
+   "assets",
+   "liabilities",
+   "equity",
+   "debt"
+  ],
+  "entity_column": "ticker",
+  "date_column": "date",
+  "metrics": [
+   {
+    "key": "net_profit_margin",
+    "label": "Net profit margin",
+    "formula": "net_income / revenue",
+    "inputs": [
+     "net_income",
+     "revenue"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 3,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": 0.12,
+    "max": 0.13076923076923078,
+    "mean": 0.1270680044593088
+   },
+   {
+    "key": "profit_margin",
+    "label": "Profit margin",
+    "formula": "profit / revenue",
+    "inputs": [
+     "profit",
+     "revenue"
+    ],
+    "status": "NOT_COMPUTABLE",
+    "reason": "profit column not found (a 'net_income' column exists but is not assumed to be equivalent)",
+    "computed_count": 0,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": null,
+    "max": null,
+    "mean": null
+   },
+   {
+    "key": "expense_ratio",
+    "label": "Expense ratio",
+    "formula": "expenses / revenue",
+    "inputs": [
+     "expenses",
+     "revenue"
+    ],
+    "status": "NOT_COMPUTABLE",
+    "reason": "expenses column not found",
+    "computed_count": 0,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": null,
+    "max": null,
+    "mean": null
+   },
+   {
+    "key": "return_on_assets",
+    "label": "Return on assets",
+    "formula": "net_income / assets",
+    "inputs": [
+     "net_income",
+     "assets"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 3,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": 0.024,
+    "max": 0.0288135593220339,
+    "mean": 0.026863779033270557
+   },
+   {
+    "key": "return_on_equity",
+    "label": "Return on equity",
+    "formula": "net_income / equity",
+    "inputs": [
+     "net_income",
+     "equity"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 3,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": 0.05333333333333334,
+    "max": 0.060714285714285714,
+    "mean": 0.05801587301587302
+   },
+   {
+    "key": "debt_to_equity",
+    "label": "Debt to equity",
+    "formula": "debt / equity",
+    "inputs": [
+     "debt",
+     "equity"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 3,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": 0.35714285714285715,
+    "max": 0.4,
+    "mean": 0.3790476190476191
+   },
+   {
+    "key": "liabilities_to_assets",
+    "label": "Liabilities to assets",
+    "formula": "liabilities / assets",
+    "inputs": [
+     "liabilities",
+     "assets"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 3,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": 0.5254237288135594,
+    "max": 0.55,
+    "mean": 0.5374869219501989
+   },
+   {
+    "key": "equity_ratio",
+    "label": "Equity ratio",
+    "formula": "equity / assets",
+    "inputs": [
+     "equity",
+     "assets"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 3,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": 0.45,
+    "max": 0.4745762711864407,
+    "mean": 0.46251307804980124
+   },
+   {
+    "key": "price_to_earnings",
+    "label": "Price to earnings",
+    "formula": "price / eps",
+    "inputs": [
+     "price",
+     "eps"
+    ],
+    "status": "NOT_COMPUTABLE",
+    "reason": "price column not found; eps column not found",
+    "computed_count": 0,
+    "skipped_count": 0,
+    "skipped_reasons": {},
+    "min": null,
+    "max": null,
+    "mean": null
+   },
+   {
+    "key": "revenue_growth",
+    "label": "Revenue growth (period over period)",
+    "formula": "(revenue - prior revenue) / prior revenue",
+    "inputs": [
+     "revenue",
+     "date"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 2,
+    "skipped_count": 1,
+    "skipped_reasons": {
+     "no prior period": 1
+    },
+    "min": 0.13043478260869565,
+    "max": 0.15,
+    "mean": 0.14021739130434782
+   },
+   {
+    "key": "net_income_growth",
+    "label": "Net income growth (period over period)",
+    "formula": "(net_income - prior net_income) / prior net_income",
+    "inputs": [
+     "net_income",
+     "date"
+    ],
+    "status": "COMPUTED",
+    "reason": null,
+    "computed_count": 2,
+    "skipped_count": 1,
+    "skipped_reasons": {
+     "no prior period": 1
+    },
+    "min": 0.13333333333333333,
+    "max": 0.25,
+    "mean": 0.19166666666666665
+   }
+  ],
+  "warnings": [],
+  "preview_rows": [
+   {
+    "row_index": 0,
+    "ticker": "AAA",
+    "date": "2022-12-31",
+    "net_profit_margin": 0.12,
+    "return_on_assets": 0.024,
+    "return_on_equity": 0.05333333333333334,
+    "debt_to_equity": 0.4,
+    "liabilities_to_assets": 0.55,
+    "equity_ratio": 0.45,
+    "revenue_growth": null,
+    "net_income_growth": null
+   },
+   {
+    "row_index": 1,
+    "ticker": "AAA",
+    "date": "2023-12-31",
+    "net_profit_margin": 0.13043478260869565,
+    "return_on_assets": 0.027777777777777776,
+    "return_on_equity": 0.06,
+    "debt_to_equity": 0.38,
+    "liabilities_to_assets": 0.5370370370370371,
+    "equity_ratio": 0.46296296296296297,
+    "revenue_growth": 0.15,
+    "net_income_growth": 0.25
+   },
+   {
+    "row_index": 2,
+    "ticker": "AAA",
+    "date": "2024-12-31",
+    "net_profit_margin": 0.13076923076923078,
+    "return_on_assets": 0.0288135593220339,
+    "return_on_equity": 0.060714285714285714,
+    "debt_to_equity": 0.35714285714285715,
+    "liabilities_to_assets": 0.5254237288135594,
+    "equity_ratio": 0.4745762711864407,
+    "revenue_growth": 0.13043478260869565,
+    "net_income_growth": 0.13333333333333333
+   }
+  ],
+  "metrics_storage_key": "analysis/fundamentals-demo.csv"
+ },
+ "sentiment": {
+  "id": "sent-1",
+  "symbol": "AAA",
+  "source_type": "TEXT",
+  "provider": null,
+  "query": null,
+  "status": "COMPLETE",
+  "created_at": "2025-01-10T12:00:00+00:00",
+  "error_code": null,
+  "error_message": null,
+  "lexicon_version": "demo",
+  "received_count": 6,
+  "duplicates_removed": 0,
+  "skipped": {},
+  "text_count": 6,
+  "scored_count": 6,
+  "counts": {
+   "positive": 4,
+   "negative": 1,
+   "neutral": 1,
+   "no_signal": 0
+  },
+  "coverage": 1.0,
+  "mean_score": 0.5,
+  "label": "positive",
+  "earliest_published": null,
+  "latest_published": null,
+  "items": [
+   {
+    "index": 0,
+    "text": "AAA beats earnings estimates and raises full-year guidance",
+    "text_truncated": false,
+    "source": null,
+    "published_at": null,
+    "url": null,
+    "score": 1.0,
+    "label": "positive",
+    "positive": 1.0,
+    "negative": 0.0,
+    "evidence": 1.0,
+    "matches": [
+     {
+      "term": "beats",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     }
+    ]
+   },
+   {
+    "index": 1,
+    "text": "AAA reports record revenue growth in the latest quarter",
+    "text_truncated": false,
+    "source": null,
+    "published_at": null,
+    "url": null,
+    "score": 1.0,
+    "label": "positive",
+    "positive": 3.0,
+    "negative": 0.0,
+    "evidence": 3.0,
+    "matches": [
+     {
+      "term": "record revenue",
+      "weight": 2,
+      "negated": false,
+      "contribution": 2
+     },
+     {
+      "term": "growth",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "text": "Analysts upgrade AAA after strong profit increase",
+    "text_truncated": false,
+    "source": null,
+    "published_at": null,
+    "url": null,
+    "score": 1.0,
+    "label": "positive",
+    "positive": 4.0,
+    "negative": 0.0,
+    "evidence": 4.0,
+    "matches": [
+     {
+      "term": "upgrade",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     },
+     {
+      "term": "strong",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     },
+     {
+      "term": "profit",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     },
+     {
+      "term": "increase",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     }
+    ]
+   },
+   {
+    "index": 3,
+    "text": "AAA faces lawsuit and shares fall on weak outlook",
+    "text_truncated": false,
+    "source": null,
+    "published_at": null,
+    "url": null,
+    "score": -1.0,
+    "label": "negative",
+    "positive": 0.0,
+    "negative": 3.0,
+    "evidence": 3.0,
+    "matches": [
+     {
+      "term": "lawsuit",
+      "weight": -1,
+      "negated": false,
+      "contribution": -1
+     },
+     {
+      "term": "fall",
+      "weight": -1,
+      "negated": false,
+      "contribution": -1
+     },
+     {
+      "term": "weak",
+      "weight": -1,
+      "negated": false,
+      "contribution": -1
+     }
+    ]
+   },
+   {
+    "index": 4,
+    "text": "AAA misses revenue estimates as costs rise",
+    "text_truncated": false,
+    "source": null,
+    "published_at": null,
+    "url": null,
+    "score": 0.0,
+    "label": "neutral",
+    "positive": 1.0,
+    "negative": 1.0,
+    "evidence": 2.0,
+    "matches": [
+     {
+      "term": "misses",
+      "weight": -1,
+      "negated": false,
+      "contribution": -1
+     },
+     {
+      "term": "rise",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     }
+    ]
+   },
+   {
+    "index": 5,
+    "text": "AAA announces dividend increase after solid results",
+    "text_truncated": false,
+    "source": null,
+    "published_at": null,
+    "url": null,
+    "score": 1.0,
+    "label": "positive",
+    "positive": 2.0,
+    "negative": 0.0,
+    "evidence": 2.0,
+    "matches": [
+     {
+      "term": "increase",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     },
+     {
+      "term": "solid",
+      "weight": 1,
+      "negated": false,
+      "contribution": 1
+     }
+    ]
+   }
+  ]
+ },
+ "bars": [
+  {
+   "date": "2024-01-02",
+   "open": 99.835,
+   "high": 100.2343,
+   "low": 99.334,
+   "close": 99.7329,
+   "volume": 1341277
+  },
+  {
+   "date": "2024-01-03",
+   "open": 102.0053,
+   "high": 102.4134,
+   "low": 101.4848,
+   "close": 101.8924,
+   "volume": 1049351
+  },
+  {
+   "date": "2024-01-04",
+   "open": 101.7047,
+   "high": 102.1116,
+   "low": 101.2456,
+   "close": 101.6522,
+   "volume": 1266042
+  },
+  {
+   "date": "2024-01-05",
+   "open": 101.8909,
+   "high": 102.2984,
+   "low": 101.3994,
+   "close": 101.8067,
+   "volume": 1219242
+  },
+  {
+   "date": "2024-01-08",
+   "open": 102.3676,
+   "high": 102.7771,
+   "low": 101.9203,
+   "close": 102.3297,
+   "volume": 1222570
+  },
+  {
+   "date": "2024-01-09",
+   "open": 103.9452,
+   "high": 104.361,
+   "low": 103.4325,
+   "close": 103.8479,
+   "volume": 1496736
+  },
+  {
+   "date": "2024-01-10",
+   "open": 104.4712,
+   "high": 104.8891,
+   "low": 103.7658,
+   "close": 104.1825,
+   "volume": 1496872
+  },
+  {
+   "date": "2024-01-11",
+   "open": 105.8661,
+   "high": 106.2896,
+   "low": 105.3367,
+   "close": 105.7597,
+   "volume": 1025999
+  },
+  {
+   "date": "2024-01-12",
+   "open": 106.1799,
+   "high": 106.6144,
+   "low": 105.7552,
+   "close": 106.1896,
+   "volume": 1450084
+  },
+  {
+   "date": "2024-01-15",
+   "open": 107.2877,
+   "high": 107.7168,
+   "low": 106.6934,
+   "close": 107.1219,
+   "volume": 1283475
+  },
+  {
+   "date": "2024-01-16",
+   "open": 108.1051,
+   "high": 108.5375,
+   "low": 107.5481,
+   "close": 107.98,
+   "volume": 1427885
+  },
+  {
+   "date": "2024-01-17",
+   "open": 107.6813,
+   "high": 108.2039,
+   "low": 107.2505,
+   "close": 107.7728,
+   "volume": 1299475
+  },
+  {
+   "date": "2024-01-18",
+   "open": 106.8553,
+   "high": 107.4417,
+   "low": 106.4279,
+   "close": 107.0136,
+   "volume": 1287175
+  },
+  {
+   "date": "2024-01-19",
+   "open": 106.3988,
+   "high": 107.0927,
+   "low": 105.9732,
+   "close": 106.666,
+   "volume": 1324539
+  },
+  {
+   "date": "2024-01-22",
+   "open": 107.5485,
+   "high": 107.9787,
+   "low": 106.8079,
+   "close": 107.2369,
+   "volume": 1224181
+  },
+  {
+   "date": "2024-01-23",
+   "open": 107.2878,
+   "high": 107.9551,
+   "low": 106.8586,
+   "close": 107.525,
+   "volume": 1484149
+  },
+  {
+   "date": "2024-01-24",
+   "open": 106.5777,
+   "high": 107.004,
+   "low": 106.0994,
+   "close": 106.5255,
+   "volume": 1416483
+  },
+  {
+   "date": "2024-01-25",
+   "open": 107.8563,
+   "high": 108.2877,
+   "low": 107.0879,
+   "close": 107.518,
+   "volume": 1042915
+  },
+  {
+   "date": "2024-01-26",
+   "open": 106.0385,
+   "high": 106.5799,
+   "low": 105.6144,
+   "close": 106.1553,
+   "volume": 1458824
+  },
+  {
+   "date": "2024-01-29",
+   "open": 105.6189,
+   "high": 106.0413,
+   "low": 105.0056,
+   "close": 105.4273,
+   "volume": 1319269
+  },
+  {
+   "date": "2024-01-30",
+   "open": 106.0855,
+   "high": 106.5231,
+   "low": 105.6611,
+   "close": 106.0987,
+   "volume": 1219216
+  },
+  {
+   "date": "2024-01-31",
+   "open": 106.9025,
+   "high": 107.3301,
+   "low": 106.3075,
+   "close": 106.7344,
+   "volume": 1489302
+  },
+  {
+   "date": "2024-02-01",
+   "open": 106.4199,
+   "high": 106.8456,
+   "low": 105.9901,
+   "close": 106.4157,
+   "volume": 1350337
+  },
+  {
+   "date": "2024-02-02",
+   "open": 108.0292,
+   "high": 108.4613,
+   "low": 107.4684,
+   "close": 107.9,
+   "volume": 1413712
+  },
+  {
+   "date": "2024-02-05",
+   "open": 108.607,
+   "high": 109.175,
+   "low": 108.1725,
+   "close": 108.74,
+   "volume": 1364535
+  },
+  {
+   "date": "2024-02-06",
+   "open": 108.0878,
+   "high": 108.5201,
+   "low": 107.4519,
+   "close": 107.8834,
+   "volume": 1417800
+  },
+  {
+   "date": "2024-02-07",
+   "open": 105.6513,
+   "high": 106.0739,
+   "low": 105.1193,
+   "close": 105.5415,
+   "volume": 1495284
+  },
+  {
+   "date": "2024-02-08",
+   "open": 105.6621,
+   "high": 106.0848,
+   "low": 104.9178,
+   "close": 105.3391,
+   "volume": 1034078
+  },
+  {
+   "date": "2024-02-09",
+   "open": 107.3298,
+   "high": 107.7591,
+   "low": 106.7769,
+   "close": 107.2057,
+   "volume": 1339281
+  },
+  {
+   "date": "2024-02-12",
+   "open": 105.3818,
+   "high": 105.9541,
+   "low": 104.9603,
+   "close": 105.532,
+   "volume": 1233644
+  },
+  {
+   "date": "2024-02-13",
+   "open": 105.5076,
+   "high": 105.9296,
+   "low": 104.8833,
+   "close": 105.3045,
+   "volume": 1350566
+  },
+  {
+   "date": "2024-02-14",
+   "open": 104.0313,
+   "high": 104.4474,
+   "low": 103.2129,
+   "close": 103.6274,
+   "volume": 1186365
+  },
+  {
+   "date": "2024-02-15",
+   "open": 104.0648,
+   "high": 104.481,
+   "low": 103.5586,
+   "close": 103.9745,
+   "volume": 1030909
+  },
+  {
+   "date": "2024-02-16",
+   "open": 104.3881,
+   "high": 104.8056,
+   "low": 103.803,
+   "close": 104.2199,
+   "volume": 1387115
+  },
+  {
+   "date": "2024-02-19",
+   "open": 104.4879,
+   "high": 104.9058,
+   "low": 103.8631,
+   "close": 104.2802,
+   "volume": 1456876
+  },
+  {
+   "date": "2024-02-20",
+   "open": 103.57,
+   "high": 103.9842,
+   "low": 103.1529,
+   "close": 103.5672,
+   "volume": 1210577
+  },
+  {
+   "date": "2024-02-21",
+   "open": 101.0273,
+   "high": 101.5601,
+   "low": 100.6232,
+   "close": 101.1555,
+   "volume": 1429538
+  },
+  {
+   "date": "2024-02-22",
+   "open": 99.9121,
+   "high": 100.3117,
+   "low": 99.4062,
+   "close": 99.8054,
+   "volume": 1370355
+  },
+  {
+   "date": "2024-02-23",
+   "open": 98.967,
+   "high": 99.3629,
+   "low": 98.4769,
+   "close": 98.8724,
+   "volume": 1463571
+  },
+  {
+   "date": "2024-02-26",
+   "open": 98.381,
+   "high": 98.7745,
+   "low": 97.8907,
+   "close": 98.2838,
+   "volume": 1043507
+  },
+  {
+   "date": "2024-02-27",
+   "open": 98.8346,
+   "high": 99.2299,
+   "low": 98.3115,
+   "close": 98.7063,
+   "volume": 1122335
+  },
+  {
+   "date": "2024-02-28",
+   "open": 101.0021,
+   "high": 101.4061,
+   "low": 100.5693,
+   "close": 100.9732,
+   "volume": 1095600
+  },
+  {
+   "date": "2024-02-29",
+   "open": 101.0231,
+   "high": 101.4272,
+   "low": 100.6008,
+   "close": 101.0048,
+   "volume": 1219648
+  },
+  {
+   "date": "2024-03-01",
+   "open": 99.3627,
+   "high": 99.8192,
+   "low": 98.9652,
+   "close": 99.4215,
+   "volume": 1167044
+  },
+  {
+   "date": "2024-03-04",
+   "open": 101.1196,
+   "high": 101.6145,
+   "low": 100.7152,
+   "close": 101.2097,
+   "volume": 1270265
+  },
+  {
+   "date": "2024-03-05",
+   "open": 102.8436,
+   "high": 103.3477,
+   "low": 102.4322,
+   "close": 102.936,
+   "volume": 1387860
+  },
+  {
+   "date": "2024-03-06",
+   "open": 105.6248,
+   "high": 106.0473,
+   "low": 105.0524,
+   "close": 105.4743,
+   "volume": 1408928
+  },
+  {
+   "date": "2024-03-07",
+   "open": 107.2454,
+   "high": 107.7714,
+   "low": 106.8164,
+   "close": 107.342,
+   "volume": 1293219
+  },
+  {
+   "date": "2024-03-08",
+   "open": 106.5055,
+   "high": 106.9315,
+   "low": 105.9457,
+   "close": 106.3711,
+   "volume": 1054283
+  },
+  {
+   "date": "2024-03-11",
+   "open": 105.1559,
+   "high": 105.5765,
+   "low": 104.7107,
+   "close": 105.1313,
+   "volume": 1099934
+  },
+  {
+   "date": "2024-03-12",
+   "open": 106.0201,
+   "high": 106.4441,
+   "low": 105.5367,
+   "close": 105.9605,
+   "volume": 1085093
+  },
+  {
+   "date": "2024-03-13",
+   "open": 107.5163,
+   "high": 107.9464,
+   "low": 106.9017,
+   "close": 107.331,
+   "volume": 1053676
+  },
+  {
+   "date": "2024-03-14",
+   "open": 108.1117,
+   "high": 108.5442,
+   "low": 107.6791,
+   "close": 108.1116,
+   "volume": 1053196
+  },
+  {
+   "date": "2024-03-15",
+   "open": 109.7574,
+   "high": 110.2924,
+   "low": 109.3184,
+   "close": 109.853,
+   "volume": 1036865
+  },
+  {
+   "date": "2024-03-18",
+   "open": 110.9599,
+   "high": 111.6225,
+   "low": 110.5161,
+   "close": 111.1778,
+   "volume": 1077883
+  },
+  {
+   "date": "2024-03-19",
+   "open": 108.6054,
+   "high": 109.4481,
+   "low": 108.171,
+   "close": 109.0121,
+   "volume": 1315767
+  },
+  {
+   "date": "2024-03-20",
+   "open": 108.6992,
+   "high": 109.134,
+   "low": 108.1809,
+   "close": 108.6154,
+   "volume": 1445087
+  },
+  {
+   "date": "2024-03-21",
+   "open": 105.1151,
+   "high": 105.5355,
+   "low": 104.6514,
+   "close": 105.0716,
+   "volume": 1251865
+  },
+  {
+   "date": "2024-03-22",
+   "open": 104.5911,
+   "high": 105.0094,
+   "low": 104.1638,
+   "close": 104.5821,
+   "volume": 1053575
+  },
+  {
+   "date": "2024-03-25",
+   "open": 104.2761,
+   "high": 105.0382,
+   "low": 103.859,
+   "close": 104.6197,
+   "volume": 1250935
+  },
+  {
+   "date": "2024-03-26",
+   "open": 104.9061,
+   "high": 105.4358,
+   "low": 104.4865,
+   "close": 105.0157,
+   "volume": 1012108
+  },
+  {
+   "date": "2024-03-27",
+   "open": 106.4218,
+   "high": 106.8474,
+   "low": 105.4965,
+   "close": 105.9202,
+   "volume": 1189662
+  },
+  {
+   "date": "2024-03-28",
+   "open": 107.1382,
+   "high": 107.5667,
+   "low": 106.4973,
+   "close": 106.925,
+   "volume": 1014178
+  },
+  {
+   "date": "2024-03-29",
+   "open": 106.8431,
+   "high": 107.4511,
+   "low": 106.4158,
+   "close": 107.023,
+   "volume": 1337073
+  },
+  {
+   "date": "2024-04-01",
+   "open": 108.1078,
+   "high": 108.7945,
+   "low": 107.6754,
+   "close": 108.3611,
+   "volume": 1136899
+  },
+  {
+   "date": "2024-04-02",
+   "open": 105.528,
+   "high": 106.0035,
+   "low": 105.1058,
+   "close": 105.5812,
+   "volume": 1186487
+  },
+  {
+   "date": "2024-04-03",
+   "open": 105.5795,
+   "high": 106.2615,
+   "low": 105.1572,
+   "close": 105.8381,
+   "volume": 1408449
+  },
+  {
+   "date": "2024-04-04",
+   "open": 104.069,
+   "high": 104.4903,
+   "low": 103.6527,
+   "close": 104.074,
+   "volume": 1321508
+  },
+  {
+   "date": "2024-04-05",
+   "open": 104.9132,
+   "high": 105.9011,
+   "low": 104.4935,
+   "close": 105.4792,
+   "volume": 1447023
+  },
+  {
+   "date": "2024-04-08",
+   "open": 105.9851,
+   "high": 106.409,
+   "low": 105.4144,
+   "close": 105.8377,
+   "volume": 1210074
+  },
+  {
+   "date": "2024-04-09",
+   "open": 105.6707,
+   "high": 106.2454,
+   "low": 105.248,
+   "close": 105.8221,
+   "volume": 1271391
+  },
+  {
+   "date": "2024-04-10",
+   "open": 103.824,
+   "high": 104.2393,
+   "low": 103.3935,
+   "close": 103.8087,
+   "volume": 1014647
+  },
+  {
+   "date": "2024-04-11",
+   "open": 103.9733,
+   "high": 104.6183,
+   "low": 103.5574,
+   "close": 104.2015,
+   "volume": 1101525
+  },
+  {
+   "date": "2024-04-12",
+   "open": 102.6535,
+   "high": 103.5493,
+   "low": 102.2429,
+   "close": 103.1368,
+   "volume": 1234476
+  },
+  {
+   "date": "2024-04-15",
+   "open": 103.5808,
+   "high": 104.3071,
+   "low": 103.1665,
+   "close": 103.8915,
+   "volume": 1183248
+  },
+  {
+   "date": "2024-04-16",
+   "open": 105.0175,
+   "high": 105.4936,
+   "low": 104.5974,
+   "close": 105.0733,
+   "volume": 1115585
+  },
+  {
+   "date": "2024-04-17",
+   "open": 106.3969,
+   "high": 106.8225,
+   "low": 105.8285,
+   "close": 106.2535,
+   "volume": 1177071
+  },
+  {
+   "date": "2024-04-18",
+   "open": 107.087,
+   "high": 107.5153,
+   "low": 106.3732,
+   "close": 106.8004,
+   "volume": 1472020
+  },
+  {
+   "date": "2024-04-19",
+   "open": 106.7737,
+   "high": 107.2093,
+   "low": 106.3466,
+   "close": 106.7821,
+   "volume": 1476682
+  },
+  {
+   "date": "2024-04-22",
+   "open": 105.1991,
+   "high": 105.9313,
+   "low": 104.7783,
+   "close": 105.5093,
+   "volume": 1044448
+  },
+  {
+   "date": "2024-04-23",
+   "open": 105.7838,
+   "high": 106.2995,
+   "low": 105.3607,
+   "close": 105.876,
+   "volume": 1203704
+  },
+  {
+   "date": "2024-04-24",
+   "open": 105.998,
+   "high": 106.7703,
+   "low": 105.574,
+   "close": 106.3449,
+   "volume": 1250626
+  },
+  {
+   "date": "2024-04-25",
+   "open": 107.2838,
+   "high": 107.8607,
+   "low": 106.8547,
+   "close": 107.431,
+   "volume": 1333364
+  },
+  {
+   "date": "2024-04-26",
+   "open": 106.6581,
+   "high": 107.0848,
+   "low": 105.901,
+   "close": 106.3263,
+   "volume": 1378444
+  },
+  {
+   "date": "2024-04-29",
+   "open": 105.4733,
+   "high": 105.8952,
+   "low": 104.922,
+   "close": 105.3434,
+   "volume": 1496394
+  },
+  {
+   "date": "2024-04-30",
+   "open": 106.0892,
+   "high": 106.5135,
+   "low": 105.6016,
+   "close": 106.0257,
+   "volume": 1066604
+  },
+  {
+   "date": "2024-05-01",
+   "open": 107.7932,
+   "high": 108.2244,
+   "low": 107.3126,
+   "close": 107.7436,
+   "volume": 1243979
+  },
+  {
+   "date": "2024-05-02",
+   "open": 107.9254,
+   "high": 108.4715,
+   "low": 107.4937,
+   "close": 108.0393,
+   "volume": 1433329
+  },
+  {
+   "date": "2024-05-03",
+   "open": 106.7336,
+   "high": 107.2985,
+   "low": 106.3067,
+   "close": 106.871,
+   "volume": 1491502
+  },
+  {
+   "date": "2024-05-06",
+   "open": 106.1754,
+   "high": 106.6001,
+   "low": 105.5357,
+   "close": 105.9595,
+   "volume": 1068673
+  },
+  {
+   "date": "2024-05-07",
+   "open": 108.3124,
+   "high": 108.7456,
+   "low": 107.8273,
+   "close": 108.2603,
+   "volume": 1380827
+  },
+  {
+   "date": "2024-05-08",
+   "open": 107.1551,
+   "high": 107.7967,
+   "low": 106.7264,
+   "close": 107.3672,
+   "volume": 1489488
+  },
+  {
+   "date": "2024-05-09",
+   "open": 110.3296,
+   "high": 110.7709,
+   "low": 109.3953,
+   "close": 109.8347,
+   "volume": 1102134
+  },
+  {
+   "date": "2024-05-10",
+   "open": 110.1616,
+   "high": 110.7377,
+   "low": 109.721,
+   "close": 110.2965,
+   "volume": 1132033
+  },
+  {
+   "date": "2024-05-13",
+   "open": 110.9563,
+   "high": 111.4002,
+   "low": 110.2595,
+   "close": 110.7023,
+   "volume": 1400388
+  },
+  {
+   "date": "2024-05-14",
+   "open": 109.7773,
+   "high": 110.3048,
+   "low": 109.3382,
+   "close": 109.8653,
+   "volume": 1219683
+  },
+  {
+   "date": "2024-05-15",
+   "open": 110.0777,
+   "high": 110.5857,
+   "low": 109.6374,
+   "close": 110.1451,
+   "volume": 1387932
+  },
+  {
+   "date": "2024-05-16",
+   "open": 109.4936,
+   "high": 109.9315,
+   "low": 108.864,
+   "close": 109.3012,
+   "volume": 1305842
+  },
+  {
+   "date": "2024-05-17",
+   "open": 109.7302,
+   "high": 110.4135,
+   "low": 109.2913,
+   "close": 109.9736,
+   "volume": 1433659
+  },
+  {
+   "date": "2024-05-20",
+   "open": 111.2416,
+   "high": 111.817,
+   "low": 110.7967,
+   "close": 111.3716,
+   "volume": 1278829
+  },
+  {
+   "date": "2024-05-21",
+   "open": 112.5593,
+   "high": 113.0095,
+   "low": 111.8908,
+   "close": 112.3402,
+   "volume": 1457601
+  },
+  {
+   "date": "2024-05-22",
+   "open": 111.6398,
+   "high": 112.0864,
+   "low": 111.1413,
+   "close": 111.5877,
+   "volume": 1002061
+  },
+  {
+   "date": "2024-05-23",
+   "open": 111.6309,
+   "high": 112.2036,
+   "low": 111.1844,
+   "close": 111.7566,
+   "volume": 1074217
+  },
+  {
+   "date": "2024-05-24",
+   "open": 109.734,
+   "high": 110.173,
+   "low": 109.2369,
+   "close": 109.6756,
+   "volume": 1291753
+  },
+  {
+   "date": "2024-05-27",
+   "open": 111.6923,
+   "high": 112.1391,
+   "low": 111.1182,
+   "close": 111.5644,
+   "volume": 1278253
+  },
+  {
+   "date": "2024-05-28",
+   "open": 109.2743,
+   "high": 109.8428,
+   "low": 108.8372,
+   "close": 109.4051,
+   "volume": 1055631
+  },
+  {
+   "date": "2024-05-29",
+   "open": 109.7321,
+   "high": 110.2216,
+   "low": 109.2932,
+   "close": 109.7824,
+   "volume": 1100299
+  },
+  {
+   "date": "2024-05-30",
+   "open": 109.8161,
+   "high": 110.2553,
+   "low": 109.0071,
+   "close": 109.4449,
+   "volume": 1266188
+  },
+  {
+   "date": "2024-05-31",
+   "open": 109.2058,
+   "high": 109.6426,
+   "low": 108.7537,
+   "close": 109.1904,
+   "volume": 1468719
+  },
+  {
+   "date": "2024-06-03",
+   "open": 110.3182,
+   "high": 110.8849,
+   "low": 109.877,
+   "close": 110.4431,
+   "volume": 1321141
+  },
+  {
+   "date": "2024-06-04",
+   "open": 112.2202,
+   "high": 112.7203,
+   "low": 111.7713,
+   "close": 112.2712,
+   "volume": 1104544
+  },
+  {
+   "date": "2024-06-05",
+   "open": 111.5659,
+   "high": 112.2427,
+   "low": 111.1197,
+   "close": 111.7956,
+   "volume": 1279595
+  },
+  {
+   "date": "2024-06-06",
+   "open": 112.1531,
+   "high": 112.8532,
+   "low": 111.7045,
+   "close": 112.4036,
+   "volume": 1129842
+  },
+  {
+   "date": "2024-06-07",
+   "open": 111.1497,
+   "high": 112.0294,
+   "low": 110.7051,
+   "close": 111.5831,
+   "volume": 1493973
+  },
+  {
+   "date": "2024-06-10",
+   "open": 114.125,
+   "high": 114.8092,
+   "low": 113.6685,
+   "close": 114.3518,
+   "volume": 1468060
+  },
+  {
+   "date": "2024-06-11",
+   "open": 116.7033,
+   "high": 117.3269,
+   "low": 116.2365,
+   "close": 116.8594,
+   "volume": 1071897
+  },
+  {
+   "date": "2024-06-12",
+   "open": 115.8096,
+   "high": 116.2729,
+   "low": 115.2313,
+   "close": 115.6941,
+   "volume": 1165664
+  },
+  {
+   "date": "2024-06-13",
+   "open": 116.7415,
+   "high": 117.2085,
+   "low": 116.1987,
+   "close": 116.6653,
+   "volume": 1038336
+  },
+  {
+   "date": "2024-06-14",
+   "open": 117.1815,
+   "high": 117.6502,
+   "low": 116.5202,
+   "close": 116.9882,
+   "volume": 1064146
+  },
+  {
+   "date": "2024-06-17",
+   "open": 117.6016,
+   "high": 118.1545,
+   "low": 117.1312,
+   "close": 117.6838,
+   "volume": 1375453
+  },
+  {
+   "date": "2024-06-18",
+   "open": 116.7189,
+   "high": 117.3616,
+   "low": 116.2521,
+   "close": 116.894,
+   "volume": 1132701
+  },
+  {
+   "date": "2024-06-19",
+   "open": 119.2417,
+   "high": 120.1411,
+   "low": 118.7647,
+   "close": 119.6625,
+   "volume": 1115127
+  },
+  {
+   "date": "2024-06-20",
+   "open": 119.5906,
+   "high": 120.1758,
+   "low": 119.1123,
+   "close": 119.697,
+   "volume": 1463959
+  },
+  {
+   "date": "2024-06-21",
+   "open": 115.4617,
+   "high": 115.9235,
+   "low": 114.9441,
+   "close": 115.4057,
+   "volume": 1436440
+  },
+  {
+   "date": "2024-06-24",
+   "open": 116.166,
+   "high": 116.6307,
+   "low": 115.3451,
+   "close": 115.8084,
+   "volume": 1270325
+  },
+  {
+   "date": "2024-06-25",
+   "open": 114.795,
+   "high": 115.2542,
+   "low": 114.2001,
+   "close": 114.6587,
+   "volume": 1186968
+  },
+  {
+   "date": "2024-06-26",
+   "open": 114.1165,
+   "high": 114.5729,
+   "low": 113.3303,
+   "close": 113.7855,
+   "volume": 1010214
+  },
+  {
+   "date": "2024-06-27",
+   "open": 113.2499,
+   "high": 113.7029,
+   "low": 112.5845,
+   "close": 113.0367,
+   "volume": 1368653
+  },
+  {
+   "date": "2024-06-28",
+   "open": 114.3147,
+   "high": 114.7719,
+   "low": 113.8342,
+   "close": 114.2914,
+   "volume": 1327117
+  },
+  {
+   "date": "2024-07-01",
+   "open": 113.9074,
+   "high": 114.363,
+   "low": 112.9004,
+   "close": 113.3538,
+   "volume": 1059165
+  },
+  {
+   "date": "2024-07-02",
+   "open": 115.7476,
+   "high": 116.2489,
+   "low": 115.2846,
+   "close": 115.7858,
+   "volume": 1459481
+  },
+  {
+   "date": "2024-07-03",
+   "open": 116.8078,
+   "high": 117.275,
+   "low": 116.2288,
+   "close": 116.6956,
+   "volume": 1020755
+  },
+  {
+   "date": "2024-07-04",
+   "open": 117.3953,
+   "high": 117.9481,
+   "low": 116.9257,
+   "close": 117.4782,
+   "volume": 1396244
+  },
+  {
+   "date": "2024-07-05",
+   "open": 118.7196,
+   "high": 119.1945,
+   "low": 118.0649,
+   "close": 118.5391,
+   "volume": 1477843
+  },
+  {
+   "date": "2024-07-08",
+   "open": 116.5395,
+   "high": 117.5131,
+   "low": 116.0733,
+   "close": 117.045,
+   "volume": 1212833
+  },
+  {
+   "date": "2024-07-09",
+   "open": 119.384,
+   "high": 119.8616,
+   "low": 118.4778,
+   "close": 118.9536,
+   "volume": 1299156
+  },
+  {
+   "date": "2024-07-10",
+   "open": 117.7385,
+   "high": 118.2095,
+   "low": 117.2605,
+   "close": 117.7314,
+   "volume": 1146309
+  },
+  {
+   "date": "2024-07-11",
+   "open": 119.9254,
+   "high": 120.4051,
+   "low": 119.3169,
+   "close": 119.796,
+   "volume": 1222988
+  },
+  {
+   "date": "2024-07-12",
+   "open": 120.6274,
+   "high": 121.2272,
+   "low": 120.1449,
+   "close": 120.7443,
+   "volume": 1008824
+  },
+  {
+   "date": "2024-07-15",
+   "open": 118.7419,
+   "high": 119.5385,
+   "low": 118.267,
+   "close": 119.0622,
+   "volume": 1043905
+  },
+  {
+   "date": "2024-07-16",
+   "open": 118.2161,
+   "high": 118.7949,
+   "low": 117.7433,
+   "close": 118.3216,
+   "volume": 1138648
+  },
+  {
+   "date": "2024-07-17",
+   "open": 119.1858,
+   "high": 119.8627,
+   "low": 118.709,
+   "close": 119.3851,
+   "volume": 1177813
+  },
+  {
+   "date": "2024-07-18",
+   "open": 120.913,
+   "high": 121.4056,
+   "low": 120.4293,
+   "close": 120.922,
+   "volume": 1479947
+  },
+  {
+   "date": "2024-07-19",
+   "open": 121.0112,
+   "high": 121.4953,
+   "low": 120.4013,
+   "close": 120.8848,
+   "volume": 1276255
+  },
+  {
+   "date": "2024-07-22",
+   "open": 119.5242,
+   "high": 120.5528,
+   "low": 119.0461,
+   "close": 120.0725,
+   "volume": 1084645
+  },
+  {
+   "date": "2024-07-23",
+   "open": 120.2039,
+   "high": 120.6847,
+   "low": 119.5723,
+   "close": 120.0525,
+   "volume": 1488765
+  },
+  {
+   "date": "2024-07-24",
+   "open": 119.8227,
+   "high": 120.302,
+   "low": 119.1553,
+   "close": 119.6339,
+   "volume": 1398195
+  },
+  {
+   "date": "2024-07-25",
+   "open": 120.3596,
+   "high": 120.841,
+   "low": 119.6282,
+   "close": 120.1086,
+   "volume": 1352403
+  },
+  {
+   "date": "2024-07-26",
+   "open": 120.9395,
+   "high": 121.4233,
+   "low": 120.2561,
+   "close": 120.739,
+   "volume": 1009522
+  },
+  {
+   "date": "2024-07-29",
+   "open": 121.1824,
+   "high": 121.6694,
+   "low": 120.6977,
+   "close": 121.1847,
+   "volume": 1009664
+  },
+  {
+   "date": "2024-07-30",
+   "open": 120.7332,
+   "high": 121.522,
+   "low": 120.2503,
+   "close": 121.0379,
+   "volume": 1099329
+  },
+  {
+   "date": "2024-07-31",
+   "open": 119.9839,
+   "high": 120.48,
+   "low": 119.5039,
+   "close": 120.0,
+   "volume": 1234385
+  },
+  {
+   "date": "2024-08-01",
+   "open": 122.4179,
+   "high": 122.9076,
+   "low": 121.6497,
+   "close": 122.1382,
+   "volume": 1226585
+  },
+  {
+   "date": "2024-08-02",
+   "open": 120.913,
+   "high": 121.6511,
+   "low": 120.4293,
+   "close": 121.1664,
+   "volume": 1465948
+  },
+  {
+   "date": "2024-08-05",
+   "open": 120.0393,
+   "high": 120.5195,
+   "low": 119.3825,
+   "close": 119.8619,
+   "volume": 1360574
+  },
+  {
+   "date": "2024-08-06",
+   "open": 120.3047,
+   "high": 120.786,
+   "low": 119.6548,
+   "close": 120.1353,
+   "volume": 1104136
+  },
+  {
+   "date": "2024-08-07",
+   "open": 120.9692,
+   "high": 121.7847,
+   "low": 120.4853,
+   "close": 121.2995,
+   "volume": 1333435
+  },
+  {
+   "date": "2024-08-08",
+   "open": 124.7294,
+   "high": 125.2283,
+   "low": 123.6565,
+   "close": 124.1531,
+   "volume": 1028515
+  },
+  {
+   "date": "2024-08-09",
+   "open": 124.298,
+   "high": 124.8313,
+   "low": 123.8008,
+   "close": 124.334,
+   "volume": 1327915
+  },
+  {
+   "date": "2024-08-12",
+   "open": 124.1274,
+   "high": 124.8154,
+   "low": 123.6309,
+   "close": 124.3181,
+   "volume": 1085588
+  },
+  {
+   "date": "2024-08-13",
+   "open": 126.5701,
+   "high": 127.0763,
+   "low": 125.9367,
+   "close": 126.4425,
+   "volume": 1199691
+  },
+  {
+   "date": "2024-08-14",
+   "open": 127.7691,
+   "high": 128.5586,
+   "low": 127.258,
+   "close": 128.0464,
+   "volume": 1147814
+  },
+  {
+   "date": "2024-08-15",
+   "open": 125.952,
+   "high": 126.6821,
+   "low": 125.4482,
+   "close": 126.1774,
+   "volume": 1023717
+  },
+  {
+   "date": "2024-08-16",
+   "open": 125.4069,
+   "high": 125.9086,
+   "low": 124.8685,
+   "close": 125.3699,
+   "volume": 1233740
+  },
+  {
+   "date": "2024-08-19",
+   "open": 126.8569,
+   "high": 127.3643,
+   "low": 126.344,
+   "close": 126.8514,
+   "volume": 1172452
+  },
+  {
+   "date": "2024-08-20",
+   "open": 128.7342,
+   "high": 129.3048,
+   "low": 128.2192,
+   "close": 128.7897,
+   "volume": 1128160
+  },
+  {
+   "date": "2024-08-21",
+   "open": 132.0814,
+   "high": 132.6098,
+   "low": 131.4363,
+   "close": 131.9642,
+   "volume": 1114224
+  },
+  {
+   "date": "2024-08-22",
+   "open": 131.9811,
+   "high": 132.509,
+   "low": 131.4436,
+   "close": 131.9715,
+   "volume": 1200082
+  },
+  {
+   "date": "2024-08-23",
+   "open": 133.2395,
+   "high": 133.7725,
+   "low": 132.5987,
+   "close": 133.1312,
+   "volume": 1343942
+  },
+  {
+   "date": "2024-08-26",
+   "open": 134.0608,
+   "high": 134.597,
+   "low": 133.2235,
+   "close": 133.7586,
+   "volume": 1002595
+  },
+  {
+   "date": "2024-08-27",
+   "open": 136.5729,
+   "high": 137.1192,
+   "low": 135.7562,
+   "close": 136.3014,
+   "volume": 1075426
+  },
+  {
+   "date": "2024-08-28",
+   "open": 136.0175,
+   "high": 136.5616,
+   "low": 135.4268,
+   "close": 135.9707,
+   "volume": 1011793
+  },
+  {
+   "date": "2024-08-29",
+   "open": 135.6823,
+   "high": 136.2251,
+   "low": 134.778,
+   "close": 135.3193,
+   "volume": 1044293
+  },
+  {
+   "date": "2024-08-30",
+   "open": 133.4935,
+   "high": 134.1962,
+   "low": 132.9595,
+   "close": 133.6616,
+   "volume": 1393499
+  },
+  {
+   "date": "2024-09-02",
+   "open": 136.0904,
+   "high": 136.6348,
+   "low": 135.0734,
+   "close": 135.6158,
+   "volume": 1411063
+  },
+  {
+   "date": "2024-09-03",
+   "open": 136.6551,
+   "high": 137.3897,
+   "low": 136.1084,
+   "close": 136.8423,
+   "volume": 1170988
+  },
+  {
+   "date": "2024-09-04",
+   "open": 136.2324,
+   "high": 137.092,
+   "low": 135.6874,
+   "close": 136.5458,
+   "volume": 1148990
+  },
+  {
+   "date": "2024-09-05",
+   "open": 135.8341,
+   "high": 136.765,
+   "low": 135.2908,
+   "close": 136.2201,
+   "volume": 1022957
+  },
+  {
+   "date": "2024-09-06",
+   "open": 137.0601,
+   "high": 137.9982,
+   "low": 136.5119,
+   "close": 137.4484,
+   "volume": 1268949
+  },
+  {
+   "date": "2024-09-09",
+   "open": 135.3171,
+   "high": 136.1763,
+   "low": 134.7758,
+   "close": 135.6337,
+   "volume": 1425836
+  },
+  {
+   "date": "2024-09-10",
+   "open": 132.0991,
+   "high": 132.6478,
+   "low": 131.5707,
+   "close": 132.1193,
+   "volume": 1394719
+  },
+  {
+   "date": "2024-09-11",
+   "open": 129.1505,
+   "high": 129.6806,
+   "low": 128.6339,
+   "close": 129.1639,
+   "volume": 1421882
+  },
+  {
+   "date": "2024-09-12",
+   "open": 131.6047,
+   "high": 132.1311,
+   "low": 131.038,
+   "close": 131.5642,
+   "volume": 1418364
+  },
+  {
+   "date": "2024-09-13",
+   "open": 133.235,
+   "high": 134.0213,
+   "low": 132.7021,
+   "close": 133.4874,
+   "volume": 1363502
+  },
+  {
+   "date": "2024-09-16",
+   "open": 133.0319,
+   "high": 133.6522,
+   "low": 132.4997,
+   "close": 133.1197,
+   "volume": 1021947
+  },
+  {
+   "date": "2024-09-17",
+   "open": 134.3741,
+   "high": 134.9116,
+   "low": 133.649,
+   "close": 134.1857,
+   "volume": 1055006
+  },
+  {
+   "date": "2024-09-18",
+   "open": 133.1831,
+   "high": 133.7158,
+   "low": 132.4472,
+   "close": 132.9791,
+   "volume": 1026623
+  },
+  {
+   "date": "2024-09-19",
+   "open": 131.2117,
+   "high": 132.003,
+   "low": 130.6869,
+   "close": 131.477,
+   "volume": 1356864
+  },
+  {
+   "date": "2024-09-20",
+   "open": 131.7777,
+   "high": 132.3048,
+   "low": 131.0456,
+   "close": 131.5718,
+   "volume": 1239572
+  },
+  {
+   "date": "2024-09-23",
+   "open": 131.9785,
+   "high": 132.9283,
+   "low": 131.4505,
+   "close": 132.3987,
+   "volume": 1263701
+  },
+  {
+   "date": "2024-09-24",
+   "open": 132.9406,
+   "high": 133.5426,
+   "low": 132.4089,
+   "close": 133.0106,
+   "volume": 1275770
+  },
+  {
+   "date": "2024-09-25",
+   "open": 135.6288,
+   "high": 136.1713,
+   "low": 134.9085,
+   "close": 135.4503,
+   "volume": 1132222
+  },
+  {
+   "date": "2024-09-26",
+   "open": 136.1552,
+   "high": 137.1944,
+   "low": 135.6106,
+   "close": 136.6478,
+   "volume": 1123095
+  },
+  {
+   "date": "2024-09-27",
+   "open": 136.375,
+   "high": 137.1048,
+   "low": 135.8295,
+   "close": 136.5586,
+   "volume": 1387883
+  },
+  {
+   "date": "2024-09-30",
+   "open": 135.2992,
+   "high": 136.0849,
+   "low": 134.758,
+   "close": 135.5427,
+   "volume": 1443301
+  },
+  {
+   "date": "2024-10-01",
+   "open": 134.4289,
+   "high": 134.9666,
+   "low": 133.6858,
+   "close": 134.2227,
+   "volume": 1358453
+  },
+  {
+   "date": "2024-10-02",
+   "open": 134.2413,
+   "high": 134.7783,
+   "low": 133.6239,
+   "close": 134.1606,
+   "volume": 1331765
+  },
+  {
+   "date": "2024-10-03",
+   "open": 133.7268,
+   "high": 134.3461,
+   "low": 133.1919,
+   "close": 133.8108,
+   "volume": 1077293
+  },
+  {
+   "date": "2024-10-04",
+   "open": 133.0541,
+   "high": 133.5863,
+   "low": 132.1875,
+   "close": 132.7184,
+   "volume": 1363272
+  },
+  {
+   "date": "2024-10-07",
+   "open": 132.4022,
+   "high": 132.9318,
+   "low": 131.5516,
+   "close": 132.0799,
+   "volume": 1006537
+  },
+  {
+   "date": "2024-10-08",
+   "open": 130.3489,
+   "high": 130.8703,
+   "low": 129.7945,
+   "close": 130.3158,
+   "volume": 1352322
+  },
+  {
+   "date": "2024-10-09",
+   "open": 131.364,
+   "high": 131.8895,
+   "low": 130.7313,
+   "close": 131.2564,
+   "volume": 1256698
+  },
+  {
+   "date": "2024-10-10",
+   "open": 131.1319,
+   "high": 131.6564,
+   "low": 130.3034,
+   "close": 130.8267,
+   "volume": 1243617
+  },
+  {
+   "date": "2024-10-11",
+   "open": 128.3531,
+   "high": 128.8666,
+   "low": 127.747,
+   "close": 128.26,
+   "volume": 1468536
+  },
+  {
+   "date": "2024-10-14",
+   "open": 126.9772,
+   "high": 127.552,
+   "low": 126.4693,
+   "close": 127.0438,
+   "volume": 1045012
+  },
+  {
+   "date": "2024-10-15",
+   "open": 127.3398,
+   "high": 127.8679,
+   "low": 126.8305,
+   "close": 127.3585,
+   "volume": 1240632
+  },
+  {
+   "date": "2024-10-16",
+   "open": 129.1622,
+   "high": 129.6788,
+   "low": 128.5043,
+   "close": 129.0204,
+   "volume": 1235641
+  },
+  {
+   "date": "2024-10-17",
+   "open": 130.5925,
+   "high": 131.1247,
+   "low": 130.0701,
+   "close": 130.6023,
+   "volume": 1480538
+  },
+  {
+   "date": "2024-10-18",
+   "open": 131.6095,
+   "high": 132.1969,
+   "low": 131.0831,
+   "close": 131.6702,
+   "volume": 1304858
+  },
+  {
+   "date": "2024-10-21",
+   "open": 134.1724,
+   "high": 134.7091,
+   "low": 133.3979,
+   "close": 133.9336,
+   "volume": 1137263
+  },
+  {
+   "date": "2024-10-22",
+   "open": 134.7649,
+   "high": 135.3462,
+   "low": 134.2258,
+   "close": 134.8069,
+   "volume": 1430029
+  },
+  {
+   "date": "2024-10-23",
+   "open": 133.8144,
+   "high": 134.51,
+   "low": 133.2792,
+   "close": 133.9741,
+   "volume": 1059075
+  },
+  {
+   "date": "2024-10-24",
+   "open": 133.5049,
+   "high": 134.2254,
+   "low": 132.9709,
+   "close": 133.6906,
+   "volume": 1470656
+  },
+  {
+   "date": "2024-10-25",
+   "open": 134.6982,
+   "high": 135.4274,
+   "low": 134.1594,
+   "close": 134.8878,
+   "volume": 1083396
+  },
+  {
+   "date": "2024-10-28",
+   "open": 136.8315,
+   "high": 137.3788,
+   "low": 136.277,
+   "close": 136.8243,
+   "volume": 1236328
+  },
+  {
+   "date": "2024-10-29",
+   "open": 134.9294,
+   "high": 135.4692,
+   "low": 134.1476,
+   "close": 134.6863,
+   "volume": 1218198
+  },
+  {
+   "date": "2024-10-30",
+   "open": 134.15,
+   "high": 134.6866,
+   "low": 133.4201,
+   "close": 133.956,
+   "volume": 1440523
+  },
+  {
+   "date": "2024-10-31",
+   "open": 133.5192,
+   "high": 134.0533,
+   "low": 132.7799,
+   "close": 133.3132,
+   "volume": 1177352
+  },
+  {
+   "date": "2024-11-01",
+   "open": 133.6815,
+   "high": 134.3314,
+   "low": 133.1468,
+   "close": 133.7962,
+   "volume": 1485699
+  },
+  {
+   "date": "2024-11-04",
+   "open": 133.9709,
+   "high": 134.5068,
+   "low": 133.3964,
+   "close": 133.9321,
+   "volume": 1387924
+  },
+  {
+   "date": "2024-11-05",
+   "open": 133.8514,
+   "high": 134.3868,
+   "low": 133.0672,
+   "close": 133.6016,
+   "volume": 1205992
+  },
+  {
+   "date": "2024-11-06",
+   "open": 131.4951,
+   "high": 132.0211,
+   "low": 130.6331,
+   "close": 131.1578,
+   "volume": 1040055
+  },
+  {
+   "date": "2024-11-07",
+   "open": 130.3552,
+   "high": 130.8767,
+   "low": 129.6234,
+   "close": 130.144,
+   "volume": 1144260
+  },
+  {
+   "date": "2024-11-08",
+   "open": 130.7997,
+   "high": 131.4922,
+   "low": 130.2765,
+   "close": 130.9683,
+   "volume": 1027062
+  },
+  {
+   "date": "2024-11-11",
+   "open": 131.4884,
+   "high": 132.2013,
+   "low": 130.9625,
+   "close": 131.6746,
+   "volume": 1490518
+  },
+  {
+   "date": "2024-11-12",
+   "open": 134.7974,
+   "high": 135.3366,
+   "low": 133.6854,
+   "close": 134.2223,
+   "volume": 1228715
+  },
+  {
+   "date": "2024-11-13",
+   "open": 133.2214,
+   "high": 133.7662,
+   "low": 132.6885,
+   "close": 133.2333,
+   "volume": 1195742
+  },
+  {
+   "date": "2024-11-14",
+   "open": 133.381,
+   "high": 134.1912,
+   "low": 132.8475,
+   "close": 133.6566,
+   "volume": 1015210
+  },
+  {
+   "date": "2024-11-15",
+   "open": 134.218,
+   "high": 135.1078,
+   "low": 133.6811,
+   "close": 134.5695,
+   "volume": 1478897
+  },
+  {
+   "date": "2024-11-18",
+   "open": 135.8378,
+   "high": 136.6256,
+   "low": 135.2945,
+   "close": 136.0813,
+   "volume": 1106658
+  },
+  {
+   "date": "2024-11-19",
+   "open": 135.9518,
+   "high": 136.581,
+   "low": 135.408,
+   "close": 136.0369,
+   "volume": 1383963
+  },
+  {
+   "date": "2024-11-20",
+   "open": 134.3774,
+   "high": 134.9149,
+   "low": 133.6437,
+   "close": 134.1805,
+   "volume": 1072651
+  },
+  {
+   "date": "2024-11-21",
+   "open": 133.2477,
+   "high": 133.9541,
+   "low": 132.7147,
+   "close": 133.4204,
+   "volume": 1025678
+  },
+  {
+   "date": "2024-11-22",
+   "open": 135.0155,
+   "high": 135.736,
+   "low": 134.4755,
+   "close": 135.1952,
+   "volume": 1089528
+  },
+  {
+   "date": "2024-11-25",
+   "open": 133.8258,
+   "high": 134.3611,
+   "low": 133.248,
+   "close": 133.7831,
+   "volume": 1156118
+  },
+  {
+   "date": "2024-11-26",
+   "open": 134.1797,
+   "high": 134.7164,
+   "low": 133.2068,
+   "close": 133.7418,
+   "volume": 1342264
+  },
+  {
+   "date": "2024-11-27",
+   "open": 134.0352,
+   "high": 134.5714,
+   "low": 133.111,
+   "close": 133.6455,
+   "volume": 1157724
+  },
+  {
+   "date": "2024-11-28",
+   "open": 131.3691,
+   "high": 131.8945,
+   "low": 130.8026,
+   "close": 131.3279,
+   "volume": 1062779
+  },
+  {
+   "date": "2024-11-29",
+   "open": 131.9809,
+   "high": 132.5088,
+   "low": 131.3176,
+   "close": 131.845,
+   "volume": 1108985
+  },
+  {
+   "date": "2024-12-02",
+   "open": 129.0041,
+   "high": 129.5219,
+   "low": 128.4881,
+   "close": 129.0059,
+   "volume": 1288561
+  },
+  {
+   "date": "2024-12-03",
+   "open": 130.2426,
+   "high": 130.7635,
+   "low": 129.1694,
+   "close": 129.6882,
+   "volume": 1398064
+  },
+  {
+   "date": "2024-12-04",
+   "open": 128.9722,
+   "high": 129.4881,
+   "low": 128.4128,
+   "close": 128.9285,
+   "volume": 1100876
+  },
+  {
+   "date": "2024-12-05",
+   "open": 129.1754,
+   "high": 129.6921,
+   "low": 128.4996,
+   "close": 129.0157,
+   "volume": 1291438
+  },
+  {
+   "date": "2024-12-06",
+   "open": 130.1336,
+   "high": 130.6541,
+   "low": 129.5093,
+   "close": 130.0294,
+   "volume": 1135453
+  },
+  {
+   "date": "2024-12-09",
+   "open": 130.3002,
+   "high": 130.9854,
+   "low": 129.779,
+   "close": 130.4635,
+   "volume": 1010528
+  },
+  {
+   "date": "2024-12-10",
+   "open": 130.2429,
+   "high": 131.0343,
+   "low": 129.7219,
+   "close": 130.5123,
+   "volume": 1216994
+  },
+  {
+   "date": "2024-12-11",
+   "open": 130.3572,
+   "high": 131.0585,
+   "low": 129.8357,
+   "close": 130.5364,
+   "volume": 1141683
+  },
+  {
+   "date": "2024-12-12",
+   "open": 130.3728,
+   "high": 130.8943,
+   "low": 129.7723,
+   "close": 130.2935,
+   "volume": 1145498
+  },
+  {
+   "date": "2024-12-13",
+   "open": 128.9164,
+   "high": 129.5422,
+   "low": 128.4007,
+   "close": 129.0261,
+   "volume": 1360056
+  },
+  {
+   "date": "2024-12-16",
+   "open": 126.8883,
+   "high": 127.4035,
+   "low": 126.3808,
+   "close": 126.896,
+   "volume": 1452387
+  },
+  {
+   "date": "2024-12-17",
+   "open": 127.2452,
+   "high": 127.846,
+   "low": 126.7362,
+   "close": 127.3366,
+   "volume": 1470176
+  },
+  {
+   "date": "2024-12-18",
+   "open": 127.66,
+   "high": 128.1706,
+   "low": 126.8929,
+   "close": 127.4025,
+   "volume": 1233758
+  },
+  {
+   "date": "2024-12-19",
+   "open": 126.3414,
+   "high": 126.8468,
+   "low": 125.7457,
+   "close": 126.2507,
+   "volume": 1426948
+  },
+  {
+   "date": "2024-12-20",
+   "open": 126.4851,
+   "high": 127.0293,
+   "low": 125.9792,
+   "close": 126.5232,
+   "volume": 1016904
+  },
+  {
+   "date": "2024-12-23",
+   "open": 124.4657,
+   "high": 124.9635,
+   "low": 123.7774,
+   "close": 124.2745,
+   "volume": 1421658
+  },
+  {
+   "date": "2024-12-24",
+   "open": 122.4228,
+   "high": 122.9125,
+   "low": 121.8789,
+   "close": 122.3684,
+   "volume": 1000093
+  },
+  {
+   "date": "2024-12-25",
+   "open": 125.7112,
+   "high": 126.214,
+   "low": 124.9526,
+   "close": 125.4544,
+   "volume": 1486623
+  },
+  {
+   "date": "2024-12-26",
+   "open": 126.4148,
+   "high": 127.366,
+   "low": 125.9091,
+   "close": 126.8586,
+   "volume": 1235379
+  },
+  {
+   "date": "2024-12-27",
+   "open": 127.0384,
+   "high": 127.5465,
+   "low": 126.4087,
+   "close": 126.9164,
+   "volume": 1080938
+  },
+  {
+   "date": "2024-12-30",
+   "open": 129.8812,
+   "high": 130.4007,
+   "low": 128.7994,
+   "close": 129.3167,
+   "volume": 1057089
+  }
+ ],
+ "tech_indicators": [
+  {
+   "key": "sma_20",
+   "label": "Simple moving average (20)",
+   "description": "Mean of the last n closes.",
+   "parameters": {
+    "period": 20
+   },
+   "min_bars": 20,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 19,
+   "computed_count": 241,
+   "undefined_rows": 0,
+   "min": 102.54467,
+   "max": 134.251985,
+   "latest": 127.90458000000001,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "sma_50",
+   "label": "Simple moving average (50)",
+   "description": "Mean of the last n closes.",
+   "parameters": {
+    "period": 50
+   },
+   "min_bars": 50,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 49,
+   "computed_count": 211,
+   "undefined_rows": 0,
+   "min": 104.46774799999999,
+   "max": 133.39967000000001,
+   "latest": 131.269012,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "sma_200",
+   "label": "Simple moving average (200)",
+   "description": "Mean of the last n closes.",
+   "parameters": {
+    "period": 200
+   },
+   "min_bars": 200,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 199,
+   "computed_count": 61,
+   "undefined_rows": 0,
+   "min": 114.5006335,
+   "max": 122.330714,
+   "latest": 122.330714,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "ema_12",
+   "label": "Exponential moving average (12)",
+   "description": "alpha = 2/(n+1); seeded with the SMA of the first n closes.",
+   "parameters": {
+    "period": 12
+   },
+   "min_bars": 12,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 11,
+   "computed_count": 249,
+   "undefined_rows": 0,
+   "min": 101.16281073059842,
+   "max": 134.76232540034334,
+   "latest": 127.1578563662637,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "ema_26",
+   "label": "Exponential moving average (26)",
+   "description": "alpha = 2/(n+1); seeded with the SMA of the first n closes.",
+   "parameters": {
+    "period": 26
+   },
+   "min_bars": 26,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 25,
+   "computed_count": 235,
+   "undefined_rows": 0,
+   "min": 102.5763261350458,
+   "max": 133.58001782608525,
+   "latest": 128.5443883104553,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "macd",
+   "label": "MACD line",
+   "description": "EMA(12) - EMA(26) of the close.",
+   "parameters": {
+    "fast": 12,
+    "slow": 26,
+    "signal": 9
+   },
+   "min_bars": 26,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 25,
+   "computed_count": 235,
+   "undefined_rows": 0,
+   "min": -2.0660276455443096,
+   "max": 4.025388987025082,
+   "latest": -1.3865319441916029,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "macd_signal",
+   "label": "MACD signal",
+   "description": "EMA(9) of the MACD line (SMA-seeded).",
+   "parameters": {
+    "fast": 12,
+    "slow": 26,
+    "signal": 9
+   },
+   "min_bars": 34,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 33,
+   "computed_count": 227,
+   "undefined_rows": 0,
+   "min": -1.6475749683826302,
+   "max": 3.721213646253717,
+   "latest": -1.5953663635444246,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "macd_histogram",
+   "label": "MACD histogram",
+   "description": "MACD line - MACD signal.",
+   "parameters": {
+    "fast": 12,
+    "slow": 26,
+    "signal": 9
+   },
+   "min_bars": 34,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 33,
+   "computed_count": 227,
+   "undefined_rows": 0,
+   "min": -0.9759433198817109,
+   "max": 0.9907619914108363,
+   "latest": 0.20883441935282177,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "rsi_14",
+   "label": "Relative strength index (14)",
+   "description": "Wilder smoothing; 100 - 100/(1 + avg gain/avg loss). Undefined when the smoothed gain and loss are both 0.",
+   "parameters": {
+    "period": 14
+   },
+   "min_bars": 15,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 14,
+   "computed_count": 246,
+   "undefined_rows": 0,
+   "min": 24.01706650567668,
+   "max": 85.77086734284256,
+   "latest": 52.24257796764149,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "bb_middle",
+   "label": "Bollinger middle band (20)",
+   "description": "SMA(20) of the close.",
+   "parameters": {
+    "period": 20,
+    "k": 2.0
+   },
+   "min_bars": 20,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 19,
+   "computed_count": 241,
+   "undefined_rows": 0,
+   "min": 102.54467,
+   "max": 134.251985,
+   "latest": 127.90458000000001,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "bb_upper",
+   "label": "Bollinger upper band (20, 2)",
+   "description": "Middle + 2 x population standard deviation.",
+   "parameters": {
+    "period": 20,
+    "k": 2.0
+   },
+   "min_bars": 20,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 19,
+   "computed_count": 241,
+   "undefined_rows": 0,
+   "min": 107.68187866078293,
+   "max": 140.7238279411692,
+   "latest": 132.31703771179738,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "bb_lower",
+   "label": "Bollinger lower band (20, 2)",
+   "description": "Middle - 2 x population standard deviation.",
+   "parameters": {
+    "period": 20,
+    "k": 2.0
+   },
+   "min_bars": 20,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 19,
+   "computed_count": 241,
+   "undefined_rows": 0,
+   "min": 95.86298671297857,
+   "max": 130.54255370718562,
+   "latest": 123.49212228820265,
+   "latest_date": "2024-12-30"
+  },
+  {
+   "key": "atr_14",
+   "label": "Average true range (14)",
+   "description": "Wilder smoothing of true range = max(high-low, |high-prev close|, |low-prev close|).",
+   "parameters": {
+    "period": 14
+   },
+   "min_bars": 15,
+   "status": "COMPUTED",
+   "reason": null,
+   "warmup_rows": 14,
+   "computed_count": 246,
+   "undefined_rows": 0,
+   "min": 1.334352674361241,
+   "max": 2.282982763315277,
+   "latest": 1.9611692130139844,
+   "latest_date": "2024-12-30"
+  }
+ ],
+ "tech_rows": [
+  {
+   "date": "2024-12-24",
+   "close": 122.3684,
+   "sma_20": 128.76848999999999,
+   "sma_50": 131.60262,
+   "sma_200": 121.90242749999999,
+   "ema_12": 126.94529146075116,
+   "ema_26": 129.01131910629547,
+   "macd": -2.0660276455443096,
+   "macd_signal": -1.4547504920535277,
+   "macd_histogram": -0.6112771534907819,
+   "rsi_14": 24.01706650567668,
+   "bb_middle": 128.76848999999999,
+   "bb_upper": 133.94093941044375,
+   "bb_lower": 123.59604058955622,
+   "atr_14": 1.747439308397648
+  },
+  {
+   "date": "2024-12-25",
+   "close": 125.4544,
+   "sma_20": 128.358935,
+   "sma_50": 131.5313,
+   "sma_200": 121.9866225,
+   "ema_12": 126.71592354371252,
+   "ema_26": 128.74784361694026,
+   "macd": -2.031920073227738,
+   "macd_signal": -1.57018440828837,
+   "macd_histogram": -0.461735664939368,
+   "rsi_14": 38.62476436594491,
+   "bb_middle": 128.358935,
+   "bb_upper": 133.20897468118818,
+   "bb_lower": 123.50889531881181,
+   "atr_14": 1.897307929226388
+  },
+  {
+   "date": "2024-12-26",
+   "close": 126.8586,
+   "sma_20": 128.13547,
+   "sma_50": 131.456426,
+   "sma_200": 122.0955575,
+   "ema_12": 126.73787376775674,
+   "ema_26": 128.60789964531506,
+   "macd": -1.8700258775583194,
+   "macd_signal": -1.63015270214236,
+   "macd_histogram": -0.23987317541595932,
+   "rsi_14": 43.908938382635284,
+   "bb_middle": 128.13547,
+   "bb_upper": 132.8269930866319,
+   "bb_lower": 123.44394691336811,
+   "atr_14": 1.8983287914245024
+  },
+  {
+   "date": "2024-12-27",
+   "close": 126.9164,
+   "sma_20": 127.88904,
+   "sma_50": 131.36135000000002,
+   "sma_200": 122.20722900000001,
+   "ema_12": 126.765339341948,
+   "ema_26": 128.48260337529172,
+   "macd": -1.7172640333437101,
+   "macd_signal": -1.6475749683826302,
+   "macd_histogram": -0.06968906496107996,
+   "rsi_14": 44.12219710999141,
+   "bb_middle": 127.88904,
+   "bb_upper": 132.28364824893413,
+   "bb_lower": 123.49443175106585,
+   "atr_14": 1.844005306322752
+  },
+  {
+   "date": "2024-12-30",
+   "close": 129.3167,
+   "sma_20": 127.90458000000001,
+   "sma_50": 131.269012,
+   "sma_200": 122.330714,
+   "ema_12": 127.1578563662637,
+   "ema_26": 128.5443883104553,
+   "macd": -1.3865319441916029,
+   "macd_signal": -1.5953663635444246,
+   "macd_histogram": 0.20883441935282177,
+   "rsi_14": 52.24257796764149,
+   "bb_middle": 127.90458000000001,
+   "bb_upper": 132.31703771179738,
+   "bb_lower": 123.49212228820265,
+   "atr_14": 1.9611692130139844
+  }
+ ],
+ "risk_metrics": [
+  {
+   "key": "daily_volatility",
+   "label": "Daily volatility",
+   "description": "Sample standard deviation (n-1) of daily simple returns.",
+   "parameters": {},
+   "min_returns": 20,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": 0.011529415601500973,
+   "details": {
+    "returns_used": 259
+   }
+  },
+  {
+   "key": "annualized_volatility",
+   "label": "Annualized volatility",
+   "description": "Daily volatility x sqrt(252). The 252 trading days per year is a convention, not a measurement.",
+   "parameters": {
+    "trading_days_per_year": 252
+   },
+   "min_returns": 20,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": 0.18302379866087848,
+   "details": {
+    "returns_used": 259
+   }
+  },
+  {
+   "key": "max_drawdown",
+   "label": "Maximum drawdown",
+   "description": "Largest peak-to-trough fall of the close: close / running peak - 1 (negative).",
+   "parameters": {},
+   "min_returns": 1,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": -0.10971389990716518,
+   "details": {
+    "peak_date": "2024-09-06",
+    "trough_date": "2024-12-24",
+    "recovery_date": null,
+    "bars_peak_to_trough": 77,
+    "bars_to_recovery": null
+   }
+  },
+  {
+   "key": "current_drawdown",
+   "label": "Current drawdown",
+   "description": "Latest close / highest close in the window - 1 (0 at a new high).",
+   "parameters": {},
+   "min_returns": 1,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": -0.05916183818800358,
+   "details": {
+    "peak_date": "2024-09-06",
+    "peak_close": 137.4484,
+    "latest_date": "2024-12-30",
+    "latest_close": 129.3167
+   }
+  },
+  {
+   "key": "worst_day",
+   "label": "Worst day",
+   "description": "Lowest single-day close-to-close return.",
+   "parameters": {},
+   "min_returns": 1,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": -0.03585135801231454,
+   "details": {
+    "date": "2024-06-21",
+    "previous_date": "2024-06-20"
+   }
+  },
+  {
+   "key": "best_day",
+   "label": "Best day",
+   "description": "Highest single-day close-to-close return.",
+   "parameters": {},
+   "min_returns": 1,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": 0.0252189290699234,
+   "details": {
+    "date": "2024-12-25",
+    "previous_date": "2024-12-24"
+   }
+  },
+  {
+   "key": "historical_var_95",
+   "label": "Historical VaR (95%)",
+   "description": "5th percentile of daily returns (linear interpolation). -0.02 = a 2% one-day loss or worse on ~5% of days.",
+   "parameters": {
+    "level": 0.95
+   },
+   "min_returns": 100,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": -0.018324609813279956,
+   "details": {
+    "returns_used": 259
+   }
+  },
+  {
+   "key": "historical_cvar_95",
+   "label": "Historical CVaR (95%)",
+   "description": "Mean of the daily returns at or below the historical VaR.",
+   "parameters": {
+    "level": 0.95
+   },
+   "min_returns": 100,
+   "status": "COMPUTED",
+   "reason": null,
+   "value": -0.02346467397383362,
+   "details": {
+    "returns_used": 259,
+    "tail_observations": 13
+   }
+  },
+  {
+   "key": "beta",
+   "label": "Beta vs benchmark",
+   "description": "cov(asset, benchmark) / var(benchmark) of returns between consecutive common dates.",
+   "parameters": {},
+   "min_returns": 60,
+   "status": "NOT_COMPUTABLE",
+   "reason": "No benchmark symbol was given.",
+   "value": null,
+   "details": {}
+  },
+  {
+   "key": "correlation",
+   "label": "Correlation vs benchmark",
+   "description": "Pearson correlation of the same aligned returns.",
+   "parameters": {},
+   "min_returns": 60,
+   "status": "NOT_COMPUTABLE",
+   "reason": "No benchmark symbol was given.",
+   "value": null,
+   "details": {}
+  }
+ ],
+ "risk_warnings": [],
+ "risk_returns": 259,
+ "score_default": {
+  "id": "score-1",
+  "symbol": "AAA",
+  "file_id": "file-1",
+  "sheet_name": null,
+  "status": "COMPLETE",
+  "created_at": "2025-01-10T12:00:00+00:00",
+  "error_code": null,
+  "error_message": null,
+  "scoring_version": "1",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "weights": {
+   "fundamental": 0.25,
+   "technical": 0.25,
+   "sentiment": 0.25,
+   "risk": 0.25
+  },
+  "weights_customised": false,
+  "overall": {
+   "score": 90.04997827031725,
+   "reason": null,
+   "weight_coverage": 0.5,
+   "contributing_components": [
+    "fundamental",
+    "sentiment"
+   ],
+   "excluded_components": {
+    "technical": "No successful technical analysis exists for AAA. Run it first.",
+    "risk": "No successful risk analysis exists for AAA. Run it first."
+   }
+  },
+  "components": [
+   {
+    "key": "fundamental",
+    "label": "Fundamentals",
+    "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+    "status": "AVAILABLE",
+    "reason": null,
+    "score": 80.09995654063451,
+    "as_of": "2024-12-31",
+    "source_ref": {
+     "kind": "fundamental",
+     "file_id": "file-1",
+     "sheet_name": "sample_financials_AAA"
+    },
+    "warnings": [],
+    "min_indicators": 2,
+    "available_indicators": 3,
+    "total_indicators": 3,
+    "indicators": [
+     {
+      "key": "net_profit_margin",
+      "label": "Net profit margin",
+      "note": "net income / revenue of the latest period",
+      "unit": "ratio",
+      "poor": 0.0,
+      "good": 0.2,
+      "direction": "higher_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.13076923076923078,
+      "sub_score": 65.38461538461539,
+      "saturated": null,
+      "weight_in_component": 0.3333333333333333,
+      "contribution_to_component": 21.794871794871796
+     },
+     {
+      "key": "debt_to_equity",
+      "label": "Debt to equity",
+      "note": "debt / equity of the latest period",
+      "unit": "ratio",
+      "poor": 2.0,
+      "good": 0.5,
+      "direction": "lower_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.35714285714285715,
+      "sub_score": 100.0,
+      "saturated": "good",
+      "weight_in_component": 0.3333333333333333,
+      "contribution_to_component": 33.33333333333333
+     },
+     {
+      "key": "liabilities_to_assets",
+      "label": "Liabilities to assets",
+      "note": "liabilities / assets of the latest period",
+      "unit": "ratio",
+      "poor": 0.9,
+      "good": 0.4,
+      "direction": "lower_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.5254237288135594,
+      "sub_score": 74.91525423728814,
+      "saturated": null,
+      "weight_in_component": 0.3333333333333333,
+      "contribution_to_component": 24.971751412429377
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": 0.5,
+    "contribution_to_overall": 40.049978270317254,
+    "in_overall": true
+   },
+   {
+    "key": "technical",
+    "label": "Technical (trend position)",
+    "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful technical analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 1,
+    "available_indicators": 0,
+    "total_indicators": 2,
+    "indicators": [
+     {
+      "key": "price_vs_sma_50",
+      "label": "Close vs 50-day average",
+      "note": "close / SMA(50) - 1",
+      "unit": "fraction",
+      "poor": -0.1,
+      "good": 0.1,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful technical analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "price_vs_sma_200",
+      "label": "Close vs 200-day average",
+      "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)",
+      "unit": "fraction",
+      "poor": -0.15,
+      "good": 0.15,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful technical analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   },
+   {
+    "key": "sentiment",
+    "label": "Sentiment",
+    "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+    "status": "AVAILABLE",
+    "reason": null,
+    "score": 100.0,
+    "as_of": null,
+    "source_ref": {
+     "kind": "sentiment",
+     "result_id": "sent-1"
+    },
+    "warnings": [],
+    "min_indicators": 1,
+    "available_indicators": 1,
+    "total_indicators": 1,
+    "indicators": [
+     {
+      "key": "sentiment_mean",
+      "label": "Mean headline sentiment",
+      "note": "needs at least 5 texts that carried a signal",
+      "unit": "score -1..1",
+      "poor": -0.5,
+      "good": 0.5,
+      "direction": "higher_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.5,
+      "sub_score": 100.0,
+      "saturated": null,
+      "weight_in_component": 1.0,
+      "contribution_to_component": 100.0
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": 0.5,
+    "contribution_to_overall": 50.0,
+    "in_overall": true
+   },
+   {
+    "key": "risk",
+    "label": "Risk (realised)",
+    "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful risk analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 2,
+    "available_indicators": 0,
+    "total_indicators": 3,
+    "indicators": [
+     {
+      "key": "annualized_volatility",
+      "label": "Annualized volatility",
+      "note": "lower volatility is treated as favourable",
+      "unit": "fraction",
+      "poor": 0.6,
+      "good": 0.15,
+      "direction": "lower_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "max_drawdown",
+      "label": "Maximum drawdown",
+      "note": "a shallower worst fall is treated as favourable",
+      "unit": "fraction",
+      "poor": -0.5,
+      "good": -0.1,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "historical_var_95",
+      "label": "Historical VaR (95%)",
+      "note": "a smaller bad-day loss is treated as favourable",
+      "unit": "fraction",
+      "poor": -0.05,
+      "good": -0.01,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   }
+  ],
+  "warnings": [],
+  "method": {
+   "scoring_version": "1",
+   "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+   "default_weights": {
+    "fundamental": 0.25,
+    "technical": 0.25,
+    "sentiment": 0.25,
+    "risk": 0.25
+   },
+   "configured_weights": {
+    "fundamental": 0.25,
+    "technical": 0.25,
+    "sentiment": 0.25,
+    "risk": 0.25
+   },
+   "min_components_for_overall": 2,
+   "min_weight_coverage_for_overall": 0.5,
+   "min_sentiment_scored_texts": 5,
+   "components": {
+    "fundamental": {
+     "label": "Fundamentals",
+     "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+     "min_indicators": 2,
+     "indicators": [
+      {
+       "key": "net_profit_margin",
+       "label": "Net profit margin",
+       "poor": 0.0,
+       "good": 0.2,
+       "unit": "ratio",
+       "note": "net income / revenue of the latest period"
+      },
+      {
+       "key": "debt_to_equity",
+       "label": "Debt to equity",
+       "poor": 2.0,
+       "good": 0.5,
+       "unit": "ratio",
+       "note": "debt / equity of the latest period"
+      },
+      {
+       "key": "liabilities_to_assets",
+       "label": "Liabilities to assets",
+       "poor": 0.9,
+       "good": 0.4,
+       "unit": "ratio",
+       "note": "liabilities / assets of the latest period"
+      }
+     ],
+     "excluded_on_purpose": "Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+    },
+    "technical": {
+     "label": "Technical (trend position)",
+     "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+     "min_indicators": 1,
+     "indicators": [
+      {
+       "key": "price_vs_sma_50",
+       "label": "Close vs 50-day average",
+       "poor": -0.1,
+       "good": 0.1,
+       "unit": "fraction",
+       "note": "close / SMA(50) - 1"
+      },
+      {
+       "key": "price_vs_sma_200",
+       "label": "Close vs 200-day average",
+       "poor": -0.15,
+       "good": 0.15,
+       "unit": "fraction",
+       "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)"
+      }
+     ],
+     "excluded_on_purpose": "Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+    },
+    "sentiment": {
+     "label": "Sentiment",
+     "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+     "min_indicators": 1,
+     "indicators": [
+      {
+       "key": "sentiment_mean",
+       "label": "Mean headline sentiment",
+       "poor": -0.5,
+       "good": 0.5,
+       "unit": "score -1..1",
+       "note": "needs at least 5 texts that carried a signal"
+      }
+     ],
+     "excluded_on_purpose": null
+    },
+    "risk": {
+     "label": "Risk (realised)",
+     "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+     "min_indicators": 2,
+     "indicators": [
+      {
+       "key": "annualized_volatility",
+       "label": "Annualized volatility",
+       "poor": 0.6,
+       "good": 0.15,
+       "unit": "fraction",
+       "note": "lower volatility is treated as favourable"
+      },
+      {
+       "key": "max_drawdown",
+       "label": "Maximum drawdown",
+       "poor": -0.5,
+       "good": -0.1,
+       "unit": "fraction",
+       "note": "a shallower worst fall is treated as favourable"
+      },
+      {
+       "key": "historical_var_95",
+       "label": "Historical VaR (95%)",
+       "poor": -0.05,
+       "good": -0.01,
+       "unit": "fraction",
+       "note": "a smaller bad-day loss is treated as favourable"
+      }
+     ],
+     "excluded_on_purpose": "Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+    }
+   },
+   "formulas": [
+    "indicator sub-score = 100 * clamp((value - poor) / (good - poor), 0, 1)",
+    "component score = weighted mean of its available indicator sub-scores (equal weights among those available)",
+    "effective component weight = configured weight / sum of configured weights of the components that contribute",
+    "overall score = sum over contributing components of (effective weight * component score)"
+   ],
+   "rules": [
+    "An indicator that is missing is excluded and the remaining indicators of that component are re-weighted; it is never filled in, defaulted, or treated as 0 or 50.",
+    "A component needs at least its stated minimum number of available indicators, otherwise it is unavailable.",
+    "The overall score needs at least 2 contributing components and at least 50% of the configured weight; otherwise it is null with the reason.",
+    "A component with weight 0 is shown but does not contribute.",
+    "Values are taken from the stored results of earlier phases exactly as stored; nothing is recomputed or repaired.",
+    "Only the latest complete result of each phase is used; the date each input is as-of is reported and no age-based discounting is applied."
+   ],
+   "limits": [
+    "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+    "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+    "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+    "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+    "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+    "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+    "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+    "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+   ]
+  }
+ },
+ "expl_default": {
+  "template_version": "1",
+  "symbol": "AAA",
+  "score_id": "score-1",
+  "scoring_version": "1",
+  "score_created_at": "2025-01-10T12:00:00+00:00",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "what": {
+   "summary": "For AAA, the explainable score is 90.0 out of 100, built from 2 of 4 components covering 50.0% of the configured weight. It is a summary of how already-computed indicators sit against fixed reference ranges; it is not a rating, a forecast or advice.",
+   "overall_score": 90.04997827031725,
+   "weight_coverage": 0.5,
+   "contributing_components": [
+    "fundamental",
+    "sentiment"
+   ],
+   "excluded_components": {
+    "technical": "No successful technical analysis exists for AAA. Run it first.",
+    "risk": "No successful risk analysis exists for AAA. Run it first."
+   },
+   "components": [
+    {
+     "key": "fundamental",
+     "label": "Fundamentals",
+     "status": "AVAILABLE",
+     "score": 80.09995654063451,
+     "sentence": "Fundamentals scored 80.1 from 3 of 3 indicators, as of 2024-12-31."
+    },
+    {
+     "key": "technical",
+     "label": "Technical (trend position)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Technical (trend position) was not scored. No successful technical analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "sentiment",
+     "label": "Sentiment",
+     "status": "AVAILABLE",
+     "score": 100.0,
+     "sentence": "Sentiment scored 100.0 from 1 of 1 indicators."
+    },
+    {
+     "key": "risk",
+     "label": "Risk (realised)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Risk (realised) was not scored. No successful risk analysis exists for AAA. Run it first."
+    }
+   ]
+  },
+  "how": {
+   "steps": [
+    "Step 1 - Each indicator value is read exactly as stored by the earlier phase; nothing is recomputed or repaired.",
+    "Step 2 - Each value becomes a 0-100 sub-score: 100 x clamp((value - poor) / (good - poor), 0, 1). The value at the 'poor' anchor scores 0, at the 'good' anchor 100, linear in between, flat beyond.",
+    "Step 3 - A component score is the equal-weighted mean of the sub-scores that are available; a missing indicator is dropped and the rest are re-weighted, never filled in.",
+    "Step 4 - Component weights (default equal): Fundamentals 25.0%, Technical (trend position) 25.0%, Sentiment 25.0%, Risk (realised) 25.0%. Components that are unavailable or weight 0 are left out and the remaining weights are rescaled to sum to 100%.",
+    "Step 5 - The overall score is the sum of (effective weight x component score) over contributing components."
+   ],
+   "components": [
+    {
+     "key": "fundamental",
+     "label": "Fundamentals",
+     "status": "AVAILABLE",
+     "score": 80.09995654063451,
+     "weight_configured": 0.25,
+     "weight_effective": 0.5,
+     "contribution_to_overall": 40.049978270317254,
+     "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+     "source_ref": {
+      "kind": "fundamental",
+      "file_id": "file-1",
+      "sheet_name": "sample_financials_AAA"
+     },
+     "indicators": [
+      {
+       "key": "net_profit_margin",
+       "label": "Net profit margin",
+       "sentence": "Net profit margin was 0.13 (net income / revenue of the latest period). The method maps 0.00 to 0 and 0.20 to 100 in a straight line (a higher value is treated as more favourable). Sub-score 65.4; weight inside its component 33.3%."
+      },
+      {
+       "key": "debt_to_equity",
+       "label": "Debt to equity",
+       "sentence": "Debt to equity was 0.36 (debt / equity of the latest period). The method maps 2.00 to 0 and 0.50 to 100 in a straight line (a lower value is treated as more favourable). The value is beyond the 100-point anchor, so the sub-score is capped at 100. Sub-score 100.0; weight inside its component 33.3%."
+      },
+      {
+       "key": "liabilities_to_assets",
+       "label": "Liabilities to assets",
+       "sentence": "Liabilities to assets was 0.53 (liabilities / assets of the latest period). The method maps 0.90 to 0 and 0.40 to 100 in a straight line (a lower value is treated as more favourable). Sub-score 74.9; weight inside its component 33.3%."
+      }
+     ],
+     "sentence": "Fundamentals: component score 80.1 x effective weight 50.0% = 40.0 points of the overall score."
+    },
+    {
+     "key": "technical",
+     "label": "Technical (trend position)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.25,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "price_vs_sma_50",
+       "label": "Close vs 50-day average",
+       "sentence": "Close vs 50-day average: not used. No successful technical analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "price_vs_sma_200",
+       "label": "Close vs 200-day average",
+       "sentence": "Close vs 200-day average: not used. No successful technical analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Technical (trend position): unavailable. No successful technical analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "sentiment",
+     "label": "Sentiment",
+     "status": "AVAILABLE",
+     "score": 100.0,
+     "weight_configured": 0.25,
+     "weight_effective": 0.5,
+     "contribution_to_overall": 50.0,
+     "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+     "source_ref": {
+      "kind": "sentiment",
+      "result_id": "sent-1"
+     },
+     "indicators": [
+      {
+       "key": "sentiment_mean",
+       "label": "Mean headline sentiment",
+       "sentence": "Mean headline sentiment was +0.50 (needs at least 5 texts that carried a signal). The method maps -0.50 to 0 and +0.50 to 100 in a straight line (a higher value is treated as more favourable). Sub-score 100.0; weight inside its component 100.0%."
+      }
+     ],
+     "sentence": "Sentiment: component score 100.0 x effective weight 50.0% = 50.0 points of the overall score."
+    },
+    {
+     "key": "risk",
+     "label": "Risk (realised)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.25,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "annualized_volatility",
+       "label": "Annualized volatility",
+       "sentence": "Annualized volatility: not used. No successful risk analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "max_drawdown",
+       "label": "Maximum drawdown",
+       "sentence": "Maximum drawdown: not used. No successful risk analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "historical_var_95",
+       "label": "Historical VaR (95%)",
+       "sentence": "Historical VaR (95%): not used. No successful risk analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Risk (realised): unavailable. No successful risk analysis exists for AAA. Run it first."
+    }
+   ],
+   "arithmetic_check": {
+    "stored_overall": 90.04997827031725,
+    "recomputed_overall": 90.04997827031725,
+    "difference": 0.0,
+    "matches": true,
+    "sentence": "Cross-check: re-deriving the overall score from the indicator rows gives 90.0500, which matches the stored 90.0500."
+   },
+   "method_version": "1"
+  },
+  "why": {
+   "largest_contributors": [
+    {
+     "component": "sentiment",
+     "indicator": "sentiment_mean",
+     "points": 50.0,
+     "sentence": "Mean headline sentiment (+0.50) added 50.0 points (sub-score 100.0)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "points": 16.666666666666664,
+     "sentence": "Debt to equity (0.36) added 16.7 points (sub-score 100.0)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "points": 12.485875706214689,
+     "sentence": "Liabilities to assets (0.53) added 12.5 points (sub-score 74.9)."
+    }
+   ],
+   "largest_point_losses": [
+    {
+     "component": "fundamental",
+     "indicator": "net_profit_margin",
+     "points": 5.769230769230768,
+     "sentence": "Net profit margin (0.13) cost 5.8 points versus a sub-score of 100 (its sub-score was 65.4)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "points": 4.180790960451977,
+     "sentence": "Liabilities to assets (0.53) cost 4.2 points versus a sub-score of 100 (its sub-score was 74.9)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "points": 0.0,
+     "sentence": "Debt to equity (0.36) cost 0.0 points versus a sub-score of 100 (its sub-score was 100.0)."
+    }
+   ],
+   "accounting": "Accounting: the overall score 90.0 = 100 - 10.0 points lost across the indicators that contributed.",
+   "why_these_indicators": [
+    {
+     "component": "fundamental",
+     "indicator": "net_profit_margin",
+     "sentence": "Net profit margin is part of the method (definition: net income / revenue of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "sentence": "Debt to equity is part of the method (definition: debt / equity of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "sentence": "Liabilities to assets is part of the method (definition: liabilities / assets of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": null,
+     "sentence": "Deliberately left out of Fundamentals: Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+    },
+    {
+     "component": "technical",
+     "indicator": "price_vs_sma_50",
+     "sentence": "Close vs 50-day average is part of the method (definition: close / SMA(50) - 1)."
+    },
+    {
+     "component": "technical",
+     "indicator": "price_vs_sma_200",
+     "sentence": "Close vs 200-day average is part of the method (definition: close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full))."
+    },
+    {
+     "component": "technical",
+     "indicator": null,
+     "sentence": "Deliberately left out of Technical (trend position): Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+    },
+    {
+     "component": "sentiment",
+     "indicator": "sentiment_mean",
+     "sentence": "Mean headline sentiment is part of the method (definition: needs at least 5 texts that carried a signal)."
+    },
+    {
+     "component": "risk",
+     "indicator": "annualized_volatility",
+     "sentence": "Annualized volatility is part of the method (definition: lower volatility is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": "max_drawdown",
+     "sentence": "Maximum drawdown is part of the method (definition: a shallower worst fall is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": "historical_var_95",
+     "sentence": "Historical VaR (95%) is part of the method (definition: a smaller bad-day loss is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": null,
+     "sentence": "Deliberately left out of Risk (realised): Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+    }
+   ],
+   "missing_or_excluded": [
+    "Technical (trend position) is not in the overall score: No successful technical analysis exists for AAA. Run it first.",
+    "Risk (realised) is not in the overall score: No successful risk analysis exists for AAA. Run it first."
+   ],
+   "assumptions": [
+    "'Favourable' means the end of each indicator's range that the method treats as favourable; this is a design assumption, not a finding.",
+    "The 'poor' and 'good' anchors are illustrative round numbers, not calibrated on data or by industry.",
+    "Equal weights are a no-information default; changing them changes the score by exactly the amounts shown."
+   ],
+   "limits": [
+    "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+    "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+    "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+    "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+    "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+    "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+    "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+    "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+   ]
+  },
+  "warnings": []
+ },
+ "score_custom": {
+  "id": "score-2",
+  "symbol": "AAA",
+  "file_id": "file-1",
+  "sheet_name": null,
+  "status": "COMPLETE",
+  "created_at": "2025-01-10T12:00:00+00:00",
+  "error_code": null,
+  "error_message": null,
+  "scoring_version": "1",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "weights": {
+   "fundamental": 0.5,
+   "technical": 0.16666666666666666,
+   "sentiment": 0.16666666666666666,
+   "risk": 0.16666666666666666
+  },
+  "weights_customised": true,
+  "overall": {
+   "score": 85.07496740547589,
+   "reason": null,
+   "weight_coverage": 0.6666666666666666,
+   "contributing_components": [
+    "fundamental",
+    "sentiment"
+   ],
+   "excluded_components": {
+    "technical": "No successful technical analysis exists for AAA. Run it first.",
+    "risk": "No successful risk analysis exists for AAA. Run it first."
+   }
+  },
+  "components": [
+   {
+    "key": "fundamental",
+    "label": "Fundamentals",
+    "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+    "status": "AVAILABLE",
+    "reason": null,
+    "score": 80.09995654063451,
+    "as_of": "2024-12-31",
+    "source_ref": {
+     "kind": "fundamental",
+     "file_id": "file-1",
+     "sheet_name": "sample_financials_AAA"
+    },
+    "warnings": [],
+    "min_indicators": 2,
+    "available_indicators": 3,
+    "total_indicators": 3,
+    "indicators": [
+     {
+      "key": "net_profit_margin",
+      "label": "Net profit margin",
+      "note": "net income / revenue of the latest period",
+      "unit": "ratio",
+      "poor": 0.0,
+      "good": 0.2,
+      "direction": "higher_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.13076923076923078,
+      "sub_score": 65.38461538461539,
+      "saturated": null,
+      "weight_in_component": 0.3333333333333333,
+      "contribution_to_component": 21.794871794871796
+     },
+     {
+      "key": "debt_to_equity",
+      "label": "Debt to equity",
+      "note": "debt / equity of the latest period",
+      "unit": "ratio",
+      "poor": 2.0,
+      "good": 0.5,
+      "direction": "lower_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.35714285714285715,
+      "sub_score": 100.0,
+      "saturated": "good",
+      "weight_in_component": 0.3333333333333333,
+      "contribution_to_component": 33.33333333333333
+     },
+     {
+      "key": "liabilities_to_assets",
+      "label": "Liabilities to assets",
+      "note": "liabilities / assets of the latest period",
+      "unit": "ratio",
+      "poor": 0.9,
+      "good": 0.4,
+      "direction": "lower_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.5254237288135594,
+      "sub_score": 74.91525423728814,
+      "saturated": null,
+      "weight_in_component": 0.3333333333333333,
+      "contribution_to_component": 24.971751412429377
+     }
+    ],
+    "weight_configured": 0.5,
+    "weight_effective": 0.75,
+    "contribution_to_overall": 60.07496740547588,
+    "in_overall": true
+   },
+   {
+    "key": "technical",
+    "label": "Technical (trend position)",
+    "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful technical analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 1,
+    "available_indicators": 0,
+    "total_indicators": 2,
+    "indicators": [
+     {
+      "key": "price_vs_sma_50",
+      "label": "Close vs 50-day average",
+      "note": "close / SMA(50) - 1",
+      "unit": "fraction",
+      "poor": -0.1,
+      "good": 0.1,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful technical analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "price_vs_sma_200",
+      "label": "Close vs 200-day average",
+      "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)",
+      "unit": "fraction",
+      "poor": -0.15,
+      "good": 0.15,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful technical analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.16666666666666666,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   },
+   {
+    "key": "sentiment",
+    "label": "Sentiment",
+    "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+    "status": "AVAILABLE",
+    "reason": null,
+    "score": 100.0,
+    "as_of": null,
+    "source_ref": {
+     "kind": "sentiment",
+     "result_id": "sent-1"
+    },
+    "warnings": [],
+    "min_indicators": 1,
+    "available_indicators": 1,
+    "total_indicators": 1,
+    "indicators": [
+     {
+      "key": "sentiment_mean",
+      "label": "Mean headline sentiment",
+      "note": "needs at least 5 texts that carried a signal",
+      "unit": "score -1..1",
+      "poor": -0.5,
+      "good": 0.5,
+      "direction": "higher_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.5,
+      "sub_score": 100.0,
+      "saturated": null,
+      "weight_in_component": 1.0,
+      "contribution_to_component": 100.0
+     }
+    ],
+    "weight_configured": 0.16666666666666666,
+    "weight_effective": 0.25,
+    "contribution_to_overall": 25.0,
+    "in_overall": true
+   },
+   {
+    "key": "risk",
+    "label": "Risk (realised)",
+    "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful risk analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 2,
+    "available_indicators": 0,
+    "total_indicators": 3,
+    "indicators": [
+     {
+      "key": "annualized_volatility",
+      "label": "Annualized volatility",
+      "note": "lower volatility is treated as favourable",
+      "unit": "fraction",
+      "poor": 0.6,
+      "good": 0.15,
+      "direction": "lower_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "max_drawdown",
+      "label": "Maximum drawdown",
+      "note": "a shallower worst fall is treated as favourable",
+      "unit": "fraction",
+      "poor": -0.5,
+      "good": -0.1,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "historical_var_95",
+      "label": "Historical VaR (95%)",
+      "note": "a smaller bad-day loss is treated as favourable",
+      "unit": "fraction",
+      "poor": -0.05,
+      "good": -0.01,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.16666666666666666,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   }
+  ],
+  "warnings": [],
+  "method": {
+   "scoring_version": "1",
+   "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+   "default_weights": {
+    "fundamental": 0.25,
+    "technical": 0.25,
+    "sentiment": 0.25,
+    "risk": 0.25
+   },
+   "configured_weights": {
+    "fundamental": 0.5,
+    "technical": 0.16666666666666666,
+    "sentiment": 0.16666666666666666,
+    "risk": 0.16666666666666666
+   },
+   "min_components_for_overall": 2,
+   "min_weight_coverage_for_overall": 0.5,
+   "min_sentiment_scored_texts": 5,
+   "components": {
+    "fundamental": {
+     "label": "Fundamentals",
+     "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+     "min_indicators": 2,
+     "indicators": [
+      {
+       "key": "net_profit_margin",
+       "label": "Net profit margin",
+       "poor": 0.0,
+       "good": 0.2,
+       "unit": "ratio",
+       "note": "net income / revenue of the latest period"
+      },
+      {
+       "key": "debt_to_equity",
+       "label": "Debt to equity",
+       "poor": 2.0,
+       "good": 0.5,
+       "unit": "ratio",
+       "note": "debt / equity of the latest period"
+      },
+      {
+       "key": "liabilities_to_assets",
+       "label": "Liabilities to assets",
+       "poor": 0.9,
+       "good": 0.4,
+       "unit": "ratio",
+       "note": "liabilities / assets of the latest period"
+      }
+     ],
+     "excluded_on_purpose": "Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+    },
+    "technical": {
+     "label": "Technical (trend position)",
+     "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+     "min_indicators": 1,
+     "indicators": [
+      {
+       "key": "price_vs_sma_50",
+       "label": "Close vs 50-day average",
+       "poor": -0.1,
+       "good": 0.1,
+       "unit": "fraction",
+       "note": "close / SMA(50) - 1"
+      },
+      {
+       "key": "price_vs_sma_200",
+       "label": "Close vs 200-day average",
+       "poor": -0.15,
+       "good": 0.15,
+       "unit": "fraction",
+       "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)"
+      }
+     ],
+     "excluded_on_purpose": "Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+    },
+    "sentiment": {
+     "label": "Sentiment",
+     "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+     "min_indicators": 1,
+     "indicators": [
+      {
+       "key": "sentiment_mean",
+       "label": "Mean headline sentiment",
+       "poor": -0.5,
+       "good": 0.5,
+       "unit": "score -1..1",
+       "note": "needs at least 5 texts that carried a signal"
+      }
+     ],
+     "excluded_on_purpose": null
+    },
+    "risk": {
+     "label": "Risk (realised)",
+     "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+     "min_indicators": 2,
+     "indicators": [
+      {
+       "key": "annualized_volatility",
+       "label": "Annualized volatility",
+       "poor": 0.6,
+       "good": 0.15,
+       "unit": "fraction",
+       "note": "lower volatility is treated as favourable"
+      },
+      {
+       "key": "max_drawdown",
+       "label": "Maximum drawdown",
+       "poor": -0.5,
+       "good": -0.1,
+       "unit": "fraction",
+       "note": "a shallower worst fall is treated as favourable"
+      },
+      {
+       "key": "historical_var_95",
+       "label": "Historical VaR (95%)",
+       "poor": -0.05,
+       "good": -0.01,
+       "unit": "fraction",
+       "note": "a smaller bad-day loss is treated as favourable"
+      }
+     ],
+     "excluded_on_purpose": "Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+    }
+   },
+   "formulas": [
+    "indicator sub-score = 100 * clamp((value - poor) / (good - poor), 0, 1)",
+    "component score = weighted mean of its available indicator sub-scores (equal weights among those available)",
+    "effective component weight = configured weight / sum of configured weights of the components that contribute",
+    "overall score = sum over contributing components of (effective weight * component score)"
+   ],
+   "rules": [
+    "An indicator that is missing is excluded and the remaining indicators of that component are re-weighted; it is never filled in, defaulted, or treated as 0 or 50.",
+    "A component needs at least its stated minimum number of available indicators, otherwise it is unavailable.",
+    "The overall score needs at least 2 contributing components and at least 50% of the configured weight; otherwise it is null with the reason.",
+    "A component with weight 0 is shown but does not contribute.",
+    "Values are taken from the stored results of earlier phases exactly as stored; nothing is recomputed or repaired.",
+    "Only the latest complete result of each phase is used; the date each input is as-of is reported and no age-based discounting is applied."
+   ],
+   "limits": [
+    "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+    "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+    "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+    "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+    "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+    "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+    "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+    "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+   ]
+  }
+ },
+ "expl_custom": {
+  "template_version": "1",
+  "symbol": "AAA",
+  "score_id": "score-2",
+  "scoring_version": "1",
+  "score_created_at": "2025-01-10T12:00:00+00:00",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "what": {
+   "summary": "For AAA, the explainable score is 85.1 out of 100, built from 2 of 4 components covering 66.7% of the configured weight. It is a summary of how already-computed indicators sit against fixed reference ranges; it is not a rating, a forecast or advice.",
+   "overall_score": 85.07496740547589,
+   "weight_coverage": 0.6666666666666666,
+   "contributing_components": [
+    "fundamental",
+    "sentiment"
+   ],
+   "excluded_components": {
+    "technical": "No successful technical analysis exists for AAA. Run it first.",
+    "risk": "No successful risk analysis exists for AAA. Run it first."
+   },
+   "components": [
+    {
+     "key": "fundamental",
+     "label": "Fundamentals",
+     "status": "AVAILABLE",
+     "score": 80.09995654063451,
+     "sentence": "Fundamentals scored 80.1 from 3 of 3 indicators, as of 2024-12-31."
+    },
+    {
+     "key": "technical",
+     "label": "Technical (trend position)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Technical (trend position) was not scored. No successful technical analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "sentiment",
+     "label": "Sentiment",
+     "status": "AVAILABLE",
+     "score": 100.0,
+     "sentence": "Sentiment scored 100.0 from 1 of 1 indicators."
+    },
+    {
+     "key": "risk",
+     "label": "Risk (realised)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Risk (realised) was not scored. No successful risk analysis exists for AAA. Run it first."
+    }
+   ]
+  },
+  "how": {
+   "steps": [
+    "Step 1 - Each indicator value is read exactly as stored by the earlier phase; nothing is recomputed or repaired.",
+    "Step 2 - Each value becomes a 0-100 sub-score: 100 x clamp((value - poor) / (good - poor), 0, 1). The value at the 'poor' anchor scores 0, at the 'good' anchor 100, linear in between, flat beyond.",
+    "Step 3 - A component score is the equal-weighted mean of the sub-scores that are available; a missing indicator is dropped and the rest are re-weighted, never filled in.",
+    "Step 4 - Component weights (custom): Fundamentals 50.0%, Technical (trend position) 16.7%, Sentiment 16.7%, Risk (realised) 16.7%. Components that are unavailable or weight 0 are left out and the remaining weights are rescaled to sum to 100%.",
+    "Step 5 - The overall score is the sum of (effective weight x component score) over contributing components."
+   ],
+   "components": [
+    {
+     "key": "fundamental",
+     "label": "Fundamentals",
+     "status": "AVAILABLE",
+     "score": 80.09995654063451,
+     "weight_configured": 0.5,
+     "weight_effective": 0.75,
+     "contribution_to_overall": 60.07496740547588,
+     "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+     "source_ref": {
+      "kind": "fundamental",
+      "file_id": "file-1",
+      "sheet_name": "sample_financials_AAA"
+     },
+     "indicators": [
+      {
+       "key": "net_profit_margin",
+       "label": "Net profit margin",
+       "sentence": "Net profit margin was 0.13 (net income / revenue of the latest period). The method maps 0.00 to 0 and 0.20 to 100 in a straight line (a higher value is treated as more favourable). Sub-score 65.4; weight inside its component 33.3%."
+      },
+      {
+       "key": "debt_to_equity",
+       "label": "Debt to equity",
+       "sentence": "Debt to equity was 0.36 (debt / equity of the latest period). The method maps 2.00 to 0 and 0.50 to 100 in a straight line (a lower value is treated as more favourable). The value is beyond the 100-point anchor, so the sub-score is capped at 100. Sub-score 100.0; weight inside its component 33.3%."
+      },
+      {
+       "key": "liabilities_to_assets",
+       "label": "Liabilities to assets",
+       "sentence": "Liabilities to assets was 0.53 (liabilities / assets of the latest period). The method maps 0.90 to 0 and 0.40 to 100 in a straight line (a lower value is treated as more favourable). Sub-score 74.9; weight inside its component 33.3%."
+      }
+     ],
+     "sentence": "Fundamentals: component score 80.1 x effective weight 75.0% = 60.1 points of the overall score."
+    },
+    {
+     "key": "technical",
+     "label": "Technical (trend position)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.16666666666666666,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "price_vs_sma_50",
+       "label": "Close vs 50-day average",
+       "sentence": "Close vs 50-day average: not used. No successful technical analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "price_vs_sma_200",
+       "label": "Close vs 200-day average",
+       "sentence": "Close vs 200-day average: not used. No successful technical analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Technical (trend position): unavailable. No successful technical analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "sentiment",
+     "label": "Sentiment",
+     "status": "AVAILABLE",
+     "score": 100.0,
+     "weight_configured": 0.16666666666666666,
+     "weight_effective": 0.25,
+     "contribution_to_overall": 25.0,
+     "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+     "source_ref": {
+      "kind": "sentiment",
+      "result_id": "sent-1"
+     },
+     "indicators": [
+      {
+       "key": "sentiment_mean",
+       "label": "Mean headline sentiment",
+       "sentence": "Mean headline sentiment was +0.50 (needs at least 5 texts that carried a signal). The method maps -0.50 to 0 and +0.50 to 100 in a straight line (a higher value is treated as more favourable). Sub-score 100.0; weight inside its component 100.0%."
+      }
+     ],
+     "sentence": "Sentiment: component score 100.0 x effective weight 25.0% = 25.0 points of the overall score."
+    },
+    {
+     "key": "risk",
+     "label": "Risk (realised)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.16666666666666666,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "annualized_volatility",
+       "label": "Annualized volatility",
+       "sentence": "Annualized volatility: not used. No successful risk analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "max_drawdown",
+       "label": "Maximum drawdown",
+       "sentence": "Maximum drawdown: not used. No successful risk analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "historical_var_95",
+       "label": "Historical VaR (95%)",
+       "sentence": "Historical VaR (95%): not used. No successful risk analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Risk (realised): unavailable. No successful risk analysis exists for AAA. Run it first."
+    }
+   ],
+   "arithmetic_check": {
+    "stored_overall": 85.07496740547589,
+    "recomputed_overall": 85.07496740547587,
+    "difference": 1.4210854715202004e-14,
+    "matches": true,
+    "sentence": "Cross-check: re-deriving the overall score from the indicator rows gives 85.0750, which matches the stored 85.0750."
+   },
+   "method_version": "1"
+  },
+  "why": {
+   "largest_contributors": [
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "points": 25.0,
+     "sentence": "Debt to equity (0.36) added 25.0 points (sub-score 100.0)."
+    },
+    {
+     "component": "sentiment",
+     "indicator": "sentiment_mean",
+     "points": 25.0,
+     "sentence": "Mean headline sentiment (+0.50) added 25.0 points (sub-score 100.0)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "points": 18.728813559322035,
+     "sentence": "Liabilities to assets (0.53) added 18.7 points (sub-score 74.9)."
+    }
+   ],
+   "largest_point_losses": [
+    {
+     "component": "fundamental",
+     "indicator": "net_profit_margin",
+     "points": 8.653846153846153,
+     "sentence": "Net profit margin (0.13) cost 8.7 points versus a sub-score of 100 (its sub-score was 65.4)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "points": 6.271186440677965,
+     "sentence": "Liabilities to assets (0.53) cost 6.3 points versus a sub-score of 100 (its sub-score was 74.9)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "points": 0.0,
+     "sentence": "Debt to equity (0.36) cost 0.0 points versus a sub-score of 100 (its sub-score was 100.0)."
+    }
+   ],
+   "accounting": "Accounting: the overall score 85.1 = 100 - 14.9 points lost across the indicators that contributed.",
+   "why_these_indicators": [
+    {
+     "component": "fundamental",
+     "indicator": "net_profit_margin",
+     "sentence": "Net profit margin is part of the method (definition: net income / revenue of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "sentence": "Debt to equity is part of the method (definition: debt / equity of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "sentence": "Liabilities to assets is part of the method (definition: liabilities / assets of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": null,
+     "sentence": "Deliberately left out of Fundamentals: Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+    },
+    {
+     "component": "technical",
+     "indicator": "price_vs_sma_50",
+     "sentence": "Close vs 50-day average is part of the method (definition: close / SMA(50) - 1)."
+    },
+    {
+     "component": "technical",
+     "indicator": "price_vs_sma_200",
+     "sentence": "Close vs 200-day average is part of the method (definition: close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full))."
+    },
+    {
+     "component": "technical",
+     "indicator": null,
+     "sentence": "Deliberately left out of Technical (trend position): Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+    },
+    {
+     "component": "sentiment",
+     "indicator": "sentiment_mean",
+     "sentence": "Mean headline sentiment is part of the method (definition: needs at least 5 texts that carried a signal)."
+    },
+    {
+     "component": "risk",
+     "indicator": "annualized_volatility",
+     "sentence": "Annualized volatility is part of the method (definition: lower volatility is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": "max_drawdown",
+     "sentence": "Maximum drawdown is part of the method (definition: a shallower worst fall is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": "historical_var_95",
+     "sentence": "Historical VaR (95%) is part of the method (definition: a smaller bad-day loss is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": null,
+     "sentence": "Deliberately left out of Risk (realised): Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+    }
+   ],
+   "missing_or_excluded": [
+    "Technical (trend position) is not in the overall score: No successful technical analysis exists for AAA. Run it first.",
+    "Risk (realised) is not in the overall score: No successful risk analysis exists for AAA. Run it first."
+   ],
+   "assumptions": [
+    "'Favourable' means the end of each indicator's range that the method treats as favourable; this is a design assumption, not a finding.",
+    "The 'poor' and 'good' anchors are illustrative round numbers, not calibrated on data or by industry.",
+    "Equal weights are a no-information default; changing them changes the score by exactly the amounts shown."
+   ],
+   "limits": [
+    "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+    "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+    "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+    "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+    "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+    "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+    "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+    "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+   ]
+  },
+  "warnings": []
+ },
+ "score_one": {
+  "id": "score-3",
+  "symbol": "AAA",
+  "file_id": null,
+  "sheet_name": null,
+  "status": "COMPLETE",
+  "created_at": "2025-01-10T12:00:00+00:00",
+  "error_code": null,
+  "error_message": null,
+  "scoring_version": "1",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "weights": {
+   "fundamental": 0.25,
+   "technical": 0.25,
+   "sentiment": 0.25,
+   "risk": 0.25
+  },
+  "weights_customised": false,
+  "overall": {
+   "score": null,
+   "reason": "Only 1 component(s) contributed; at least 2 are needed for an overall score.",
+   "weight_coverage": 0.25,
+   "contributing_components": [
+    "sentiment"
+   ],
+   "excluded_components": {
+    "fundamental": "No successful fundamental analysis exists for AAA. Run it first.",
+    "technical": "No successful technical analysis exists for AAA. Run it first.",
+    "risk": "No successful risk analysis exists for AAA. Run it first."
+   }
+  },
+  "components": [
+   {
+    "key": "fundamental",
+    "label": "Fundamentals",
+    "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful fundamental analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 2,
+    "available_indicators": 0,
+    "total_indicators": 3,
+    "indicators": [
+     {
+      "key": "net_profit_margin",
+      "label": "Net profit margin",
+      "note": "net income / revenue of the latest period",
+      "unit": "ratio",
+      "poor": 0.0,
+      "good": 0.2,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful fundamental analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "debt_to_equity",
+      "label": "Debt to equity",
+      "note": "debt / equity of the latest period",
+      "unit": "ratio",
+      "poor": 2.0,
+      "good": 0.5,
+      "direction": "lower_is_better",
+      "status": "MISSING",
+      "reason": "No successful fundamental analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "liabilities_to_assets",
+      "label": "Liabilities to assets",
+      "note": "liabilities / assets of the latest period",
+      "unit": "ratio",
+      "poor": 0.9,
+      "good": 0.4,
+      "direction": "lower_is_better",
+      "status": "MISSING",
+      "reason": "No successful fundamental analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   },
+   {
+    "key": "technical",
+    "label": "Technical (trend position)",
+    "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful technical analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 1,
+    "available_indicators": 0,
+    "total_indicators": 2,
+    "indicators": [
+     {
+      "key": "price_vs_sma_50",
+      "label": "Close vs 50-day average",
+      "note": "close / SMA(50) - 1",
+      "unit": "fraction",
+      "poor": -0.1,
+      "good": 0.1,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful technical analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "price_vs_sma_200",
+      "label": "Close vs 200-day average",
+      "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)",
+      "unit": "fraction",
+      "poor": -0.15,
+      "good": 0.15,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful technical analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   },
+   {
+    "key": "sentiment",
+    "label": "Sentiment",
+    "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+    "status": "AVAILABLE",
+    "reason": null,
+    "score": 100.0,
+    "as_of": null,
+    "source_ref": {
+     "kind": "sentiment",
+     "result_id": "sent-1"
+    },
+    "warnings": [],
+    "min_indicators": 1,
+    "available_indicators": 1,
+    "total_indicators": 1,
+    "indicators": [
+     {
+      "key": "sentiment_mean",
+      "label": "Mean headline sentiment",
+      "note": "needs at least 5 texts that carried a signal",
+      "unit": "score -1..1",
+      "poor": -0.5,
+      "good": 0.5,
+      "direction": "higher_is_better",
+      "status": "AVAILABLE",
+      "reason": null,
+      "value": 0.5,
+      "sub_score": 100.0,
+      "saturated": null,
+      "weight_in_component": 1.0,
+      "contribution_to_component": 100.0
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   },
+   {
+    "key": "risk",
+    "label": "Risk (realised)",
+    "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+    "status": "UNAVAILABLE",
+    "reason": "No successful risk analysis exists for AAA. Run it first.",
+    "score": null,
+    "as_of": null,
+    "source_ref": {},
+    "warnings": [],
+    "min_indicators": 2,
+    "available_indicators": 0,
+    "total_indicators": 3,
+    "indicators": [
+     {
+      "key": "annualized_volatility",
+      "label": "Annualized volatility",
+      "note": "lower volatility is treated as favourable",
+      "unit": "fraction",
+      "poor": 0.6,
+      "good": 0.15,
+      "direction": "lower_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "max_drawdown",
+      "label": "Maximum drawdown",
+      "note": "a shallower worst fall is treated as favourable",
+      "unit": "fraction",
+      "poor": -0.5,
+      "good": -0.1,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     },
+     {
+      "key": "historical_var_95",
+      "label": "Historical VaR (95%)",
+      "note": "a smaller bad-day loss is treated as favourable",
+      "unit": "fraction",
+      "poor": -0.05,
+      "good": -0.01,
+      "direction": "higher_is_better",
+      "status": "MISSING",
+      "reason": "No successful risk analysis exists for AAA. Run it first.",
+      "value": null,
+      "sub_score": null,
+      "saturated": null,
+      "weight_in_component": null,
+      "contribution_to_component": null
+     }
+    ],
+    "weight_configured": 0.25,
+    "weight_effective": null,
+    "contribution_to_overall": null,
+    "in_overall": false
+   }
+  ],
+  "warnings": [],
+  "method": {
+   "scoring_version": "1",
+   "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+   "default_weights": {
+    "fundamental": 0.25,
+    "technical": 0.25,
+    "sentiment": 0.25,
+    "risk": 0.25
+   },
+   "configured_weights": {
+    "fundamental": 0.25,
+    "technical": 0.25,
+    "sentiment": 0.25,
+    "risk": 0.25
+   },
+   "min_components_for_overall": 2,
+   "min_weight_coverage_for_overall": 0.5,
+   "min_sentiment_scored_texts": 5,
+   "components": {
+    "fundamental": {
+     "label": "Fundamentals",
+     "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+     "min_indicators": 2,
+     "indicators": [
+      {
+       "key": "net_profit_margin",
+       "label": "Net profit margin",
+       "poor": 0.0,
+       "good": 0.2,
+       "unit": "ratio",
+       "note": "net income / revenue of the latest period"
+      },
+      {
+       "key": "debt_to_equity",
+       "label": "Debt to equity",
+       "poor": 2.0,
+       "good": 0.5,
+       "unit": "ratio",
+       "note": "debt / equity of the latest period"
+      },
+      {
+       "key": "liabilities_to_assets",
+       "label": "Liabilities to assets",
+       "poor": 0.9,
+       "good": 0.4,
+       "unit": "ratio",
+       "note": "liabilities / assets of the latest period"
+      }
+     ],
+     "excluded_on_purpose": "Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+    },
+    "technical": {
+     "label": "Technical (trend position)",
+     "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+     "min_indicators": 1,
+     "indicators": [
+      {
+       "key": "price_vs_sma_50",
+       "label": "Close vs 50-day average",
+       "poor": -0.1,
+       "good": 0.1,
+       "unit": "fraction",
+       "note": "close / SMA(50) - 1"
+      },
+      {
+       "key": "price_vs_sma_200",
+       "label": "Close vs 200-day average",
+       "poor": -0.15,
+       "good": 0.15,
+       "unit": "fraction",
+       "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)"
+      }
+     ],
+     "excluded_on_purpose": "Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+    },
+    "sentiment": {
+     "label": "Sentiment",
+     "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+     "min_indicators": 1,
+     "indicators": [
+      {
+       "key": "sentiment_mean",
+       "label": "Mean headline sentiment",
+       "poor": -0.5,
+       "good": 0.5,
+       "unit": "score -1..1",
+       "note": "needs at least 5 texts that carried a signal"
+      }
+     ],
+     "excluded_on_purpose": null
+    },
+    "risk": {
+     "label": "Risk (realised)",
+     "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+     "min_indicators": 2,
+     "indicators": [
+      {
+       "key": "annualized_volatility",
+       "label": "Annualized volatility",
+       "poor": 0.6,
+       "good": 0.15,
+       "unit": "fraction",
+       "note": "lower volatility is treated as favourable"
+      },
+      {
+       "key": "max_drawdown",
+       "label": "Maximum drawdown",
+       "poor": -0.5,
+       "good": -0.1,
+       "unit": "fraction",
+       "note": "a shallower worst fall is treated as favourable"
+      },
+      {
+       "key": "historical_var_95",
+       "label": "Historical VaR (95%)",
+       "poor": -0.05,
+       "good": -0.01,
+       "unit": "fraction",
+       "note": "a smaller bad-day loss is treated as favourable"
+      }
+     ],
+     "excluded_on_purpose": "Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+    }
+   },
+   "formulas": [
+    "indicator sub-score = 100 * clamp((value - poor) / (good - poor), 0, 1)",
+    "component score = weighted mean of its available indicator sub-scores (equal weights among those available)",
+    "effective component weight = configured weight / sum of configured weights of the components that contribute",
+    "overall score = sum over contributing components of (effective weight * component score)"
+   ],
+   "rules": [
+    "An indicator that is missing is excluded and the remaining indicators of that component are re-weighted; it is never filled in, defaulted, or treated as 0 or 50.",
+    "A component needs at least its stated minimum number of available indicators, otherwise it is unavailable.",
+    "The overall score needs at least 2 contributing components and at least 50% of the configured weight; otherwise it is null with the reason.",
+    "A component with weight 0 is shown but does not contribute.",
+    "Values are taken from the stored results of earlier phases exactly as stored; nothing is recomputed or repaired.",
+    "Only the latest complete result of each phase is used; the date each input is as-of is reported and no age-based discounting is applied."
+   ],
+   "limits": [
+    "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+    "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+    "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+    "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+    "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+    "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+    "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+    "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+   ]
+  }
+ },
+ "expl_one": {
+  "template_version": "1",
+  "symbol": "AAA",
+  "score_id": "score-3",
+  "scoring_version": "1",
+  "score_created_at": "2025-01-10T12:00:00+00:00",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "what": {
+   "summary": "For AAA, no overall score could be produced. Only 1 component(s) contributed; at least 2 are needed for an overall score. The components that could be scored are shown below.",
+   "overall_score": null,
+   "weight_coverage": 0.25,
+   "contributing_components": [
+    "sentiment"
+   ],
+   "excluded_components": {
+    "fundamental": "No successful fundamental analysis exists for AAA. Run it first.",
+    "technical": "No successful technical analysis exists for AAA. Run it first.",
+    "risk": "No successful risk analysis exists for AAA. Run it first."
+   },
+   "components": [
+    {
+     "key": "fundamental",
+     "label": "Fundamentals",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Fundamentals was not scored. No successful fundamental analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "technical",
+     "label": "Technical (trend position)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Technical (trend position) was not scored. No successful technical analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "sentiment",
+     "label": "Sentiment",
+     "status": "AVAILABLE",
+     "score": 100.0,
+     "sentence": "Sentiment scored 100.0 from 1 of 1 indicators. It does not count toward the overall score (weight 0 or overall not produced)."
+    },
+    {
+     "key": "risk",
+     "label": "Risk (realised)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "sentence": "Risk (realised) was not scored. No successful risk analysis exists for AAA. Run it first."
+    }
+   ]
+  },
+  "how": {
+   "steps": [
+    "Step 1 - Each indicator value is read exactly as stored by the earlier phase; nothing is recomputed or repaired.",
+    "Step 2 - Each value becomes a 0-100 sub-score: 100 x clamp((value - poor) / (good - poor), 0, 1). The value at the 'poor' anchor scores 0, at the 'good' anchor 100, linear in between, flat beyond.",
+    "Step 3 - A component score is the equal-weighted mean of the sub-scores that are available; a missing indicator is dropped and the rest are re-weighted, never filled in.",
+    "Step 4 - Component weights (default equal): Fundamentals 25.0%, Technical (trend position) 25.0%, Sentiment 25.0%, Risk (realised) 25.0%. Components that are unavailable or weight 0 are left out and the remaining weights are rescaled to sum to 100%.",
+    "Step 5 - The overall score is the sum of (effective weight x component score) over contributing components."
+   ],
+   "components": [
+    {
+     "key": "fundamental",
+     "label": "Fundamentals",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.25,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "net_profit_margin",
+       "label": "Net profit margin",
+       "sentence": "Net profit margin: not used. No successful fundamental analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "debt_to_equity",
+       "label": "Debt to equity",
+       "sentence": "Debt to equity: not used. No successful fundamental analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "liabilities_to_assets",
+       "label": "Liabilities to assets",
+       "sentence": "Liabilities to assets: not used. No successful fundamental analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Fundamentals: unavailable. No successful fundamental analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "technical",
+     "label": "Technical (trend position)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.25,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "price_vs_sma_50",
+       "label": "Close vs 50-day average",
+       "sentence": "Close vs 50-day average: not used. No successful technical analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "price_vs_sma_200",
+       "label": "Close vs 200-day average",
+       "sentence": "Close vs 200-day average: not used. No successful technical analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Technical (trend position): unavailable. No successful technical analysis exists for AAA. Run it first."
+    },
+    {
+     "key": "sentiment",
+     "label": "Sentiment",
+     "status": "AVAILABLE",
+     "score": 100.0,
+     "weight_configured": 0.25,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+     "source_ref": {
+      "kind": "sentiment",
+      "result_id": "sent-1"
+     },
+     "indicators": [
+      {
+       "key": "sentiment_mean",
+       "label": "Mean headline sentiment",
+       "sentence": "Mean headline sentiment was +0.50 (needs at least 5 texts that carried a signal). The method maps -0.50 to 0 and +0.50 to 100 in a straight line (a higher value is treated as more favourable). Sub-score 100.0; weight inside its component 100.0%."
+      }
+     ],
+     "sentence": "Sentiment: component score 100.0; not part of the overall score."
+    },
+    {
+     "key": "risk",
+     "label": "Risk (realised)",
+     "status": "UNAVAILABLE",
+     "score": null,
+     "weight_configured": 0.25,
+     "weight_effective": null,
+     "contribution_to_overall": null,
+     "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+     "source_ref": {},
+     "indicators": [
+      {
+       "key": "annualized_volatility",
+       "label": "Annualized volatility",
+       "sentence": "Annualized volatility: not used. No successful risk analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "max_drawdown",
+       "label": "Maximum drawdown",
+       "sentence": "Maximum drawdown: not used. No successful risk analysis exists for AAA. Run it first."
+      },
+      {
+       "key": "historical_var_95",
+       "label": "Historical VaR (95%)",
+       "sentence": "Historical VaR (95%): not used. No successful risk analysis exists for AAA. Run it first."
+      }
+     ],
+     "sentence": "Risk (realised): unavailable. No successful risk analysis exists for AAA. Run it first."
+    }
+   ],
+   "arithmetic_check": {
+    "stored_overall": null,
+    "recomputed_overall": null,
+    "difference": null,
+    "matches": true,
+    "sentence": "There is no overall score, so there is no arithmetic to check."
+   },
+   "method_version": "1"
+  },
+  "why": {
+   "largest_contributors": [],
+   "largest_point_losses": [],
+   "accounting": null,
+   "why_these_indicators": [
+    {
+     "component": "fundamental",
+     "indicator": "net_profit_margin",
+     "sentence": "Net profit margin is part of the method (definition: net income / revenue of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "debt_to_equity",
+     "sentence": "Debt to equity is part of the method (definition: debt / equity of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": "liabilities_to_assets",
+     "sentence": "Liabilities to assets is part of the method (definition: liabilities / assets of the latest period)."
+    },
+    {
+     "component": "fundamental",
+     "indicator": null,
+     "sentence": "Deliberately left out of Fundamentals: Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+    },
+    {
+     "component": "technical",
+     "indicator": "price_vs_sma_50",
+     "sentence": "Close vs 50-day average is part of the method (definition: close / SMA(50) - 1)."
+    },
+    {
+     "component": "technical",
+     "indicator": "price_vs_sma_200",
+     "sentence": "Close vs 200-day average is part of the method (definition: close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full))."
+    },
+    {
+     "component": "technical",
+     "indicator": null,
+     "sentence": "Deliberately left out of Technical (trend position): Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+    },
+    {
+     "component": "sentiment",
+     "indicator": "sentiment_mean",
+     "sentence": "Mean headline sentiment is part of the method (definition: needs at least 5 texts that carried a signal)."
+    },
+    {
+     "component": "risk",
+     "indicator": "annualized_volatility",
+     "sentence": "Annualized volatility is part of the method (definition: lower volatility is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": "max_drawdown",
+     "sentence": "Maximum drawdown is part of the method (definition: a shallower worst fall is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": "historical_var_95",
+     "sentence": "Historical VaR (95%) is part of the method (definition: a smaller bad-day loss is treated as favourable)."
+    },
+    {
+     "component": "risk",
+     "indicator": null,
+     "sentence": "Deliberately left out of Risk (realised): Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+    }
+   ],
+   "missing_or_excluded": [
+    "Fundamentals is not in the overall score: No successful fundamental analysis exists for AAA. Run it first.",
+    "Technical (trend position) is not in the overall score: No successful technical analysis exists for AAA. Run it first.",
+    "Risk (realised) is not in the overall score: No successful risk analysis exists for AAA. Run it first."
+   ],
+   "assumptions": [
+    "'Favourable' means the end of each indicator's range that the method treats as favourable; this is a design assumption, not a finding.",
+    "The 'poor' and 'good' anchors are illustrative round numbers, not calibrated on data or by industry.",
+    "Equal weights are a no-information default; changing them changes the score by exactly the amounts shown."
+   ],
+   "limits": [
+    "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+    "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+    "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+    "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+    "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+    "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+    "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+    "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+   ]
+  },
+  "warnings": []
+ },
+ "custom_weights": {
+  "fundamental": 3,
+  "technical": 1,
+  "sentiment": 1,
+  "risk": 1
+ },
+ "scoring_method": {
+  "scoring_version": "1",
+  "notice": "Educational use only. Not investment advice, not a recommendation, not a forecast. See `limits` for how to read this score.",
+  "default_weights": {
+   "fundamental": 0.25,
+   "technical": 0.25,
+   "sentiment": 0.25,
+   "risk": 0.25
+  },
+  "configured_weights": {
+   "fundamental": 0.25,
+   "technical": 0.25,
+   "sentiment": 0.25,
+   "risk": 0.25
+  },
+  "min_components_for_overall": 2,
+  "min_weight_coverage_for_overall": 0.5,
+  "min_sentiment_scored_texts": 5,
+  "components": {
+   "fundamental": {
+    "label": "Fundamentals",
+    "source": "Phase 5 fundamental analysis of an uploaded file (latest period for the symbol)",
+    "min_indicators": 2,
+    "indicators": [
+     {
+      "key": "net_profit_margin",
+      "label": "Net profit margin",
+      "poor": 0.0,
+      "good": 0.2,
+      "unit": "ratio",
+      "note": "net income / revenue of the latest period"
+     },
+     {
+      "key": "debt_to_equity",
+      "label": "Debt to equity",
+      "poor": 2.0,
+      "good": 0.5,
+      "unit": "ratio",
+      "note": "debt / equity of the latest period"
+     },
+     {
+      "key": "liabilities_to_assets",
+      "label": "Liabilities to assets",
+      "poor": 0.9,
+      "good": 0.4,
+      "unit": "ratio",
+      "note": "liabilities / assets of the latest period"
+     }
+    ],
+    "excluded_on_purpose": "Return on assets/equity and growth rates are not used: their size depends on whether a row is an annual or a quarterly period, which the uploaded data does not state."
+   },
+   "technical": {
+    "label": "Technical (trend position)",
+    "source": "Phase 7 technical analysis of the symbol's stored prices (latest bar)",
+    "min_indicators": 1,
+    "indicators": [
+     {
+      "key": "price_vs_sma_50",
+      "label": "Close vs 50-day average",
+      "poor": -0.1,
+      "good": 0.1,
+      "unit": "fraction",
+      "note": "close / SMA(50) - 1"
+     },
+     {
+      "key": "price_vs_sma_200",
+      "label": "Close vs 200-day average",
+      "poor": -0.15,
+      "good": 0.15,
+      "unit": "fraction",
+      "note": "close / SMA(200) - 1 (needs 200 bars: fetch market data with history=full)"
+     }
+    ],
+    "excluded_on_purpose": "Oscillators such as RSI are not used: mapping them to 'favourable' needs a judgement about overbought/oversold that this project deliberately does not make."
+   },
+   "sentiment": {
+    "label": "Sentiment",
+    "source": "Phase 8 sentiment analysis of the symbol (latest complete result)",
+    "min_indicators": 1,
+    "indicators": [
+     {
+      "key": "sentiment_mean",
+      "label": "Mean headline sentiment",
+      "poor": -0.5,
+      "good": 0.5,
+      "unit": "score -1..1",
+      "note": "needs at least 5 texts that carried a signal"
+     }
+    ],
+    "excluded_on_purpose": null
+   },
+   "risk": {
+    "label": "Risk (realised)",
+    "source": "Phase 9 risk analysis of the symbol's stored prices (latest complete result)",
+    "min_indicators": 2,
+    "indicators": [
+     {
+      "key": "annualized_volatility",
+      "label": "Annualized volatility",
+      "poor": 0.6,
+      "good": 0.15,
+      "unit": "fraction",
+      "note": "lower volatility is treated as favourable"
+     },
+     {
+      "key": "max_drawdown",
+      "label": "Maximum drawdown",
+      "poor": -0.5,
+      "good": -0.1,
+      "unit": "fraction",
+      "note": "a shallower worst fall is treated as favourable"
+     },
+     {
+      "key": "historical_var_95",
+      "label": "Historical VaR (95%)",
+      "poor": -0.05,
+      "good": -0.01,
+      "unit": "fraction",
+      "note": "a smaller bad-day loss is treated as favourable"
+     }
+    ],
+    "excluded_on_purpose": "Beta and correlation are not used: they depend entirely on the benchmark chosen, and a neutral 'good' value for them cannot be defined without an investment objective."
+   }
+  },
+  "formulas": [
+   "indicator sub-score = 100 * clamp((value - poor) / (good - poor), 0, 1)",
+   "component score = weighted mean of its available indicator sub-scores (equal weights among those available)",
+   "effective component weight = configured weight / sum of configured weights of the components that contribute",
+   "overall score = sum over contributing components of (effective weight * component score)"
+  ],
+  "rules": [
+   "An indicator that is missing is excluded and the remaining indicators of that component are re-weighted; it is never filled in, defaulted, or treated as 0 or 50.",
+   "A component needs at least its stated minimum number of available indicators, otherwise it is unavailable.",
+   "The overall score needs at least 2 contributing components and at least 50% of the configured weight; otherwise it is null with the reason.",
+   "A component with weight 0 is shown but does not contribute.",
+   "Values are taken from the stored results of earlier phases exactly as stored; nothing is recomputed or repaired.",
+   "Only the latest complete result of each phase is used; the date each input is as-of is reported and no age-based discounting is applied."
+  ],
+  "limits": [
+   "This is an educational summary, not investment advice. It does not recommend buying, selling, or holding anything and says nothing about future returns.",
+   "The reference anchors are illustrative round numbers, not calibrated on data, industries, or market regimes; the same ratio can be ordinary in one sector and alarming in another.",
+   "'Favourable' encodes design assumptions (for example, lower volatility is preferred). They are choices, not findings, and a different investor objective would justify different anchors.",
+   "Equal weights are a no-information default, not evidence that the components matter equally. Changing the weights changes the score by exactly the amounts shown.",
+   "The score has not been backtested or validated against outcomes; no predictive power is claimed.",
+   "A score built from fewer components or indicators is less informative; always read the reported coverage.",
+   "The score inherits the limits of every input phase: prices are unadjusted for splits and dividends, sentiment accuracy has not been measured, fundamentals are only as good as the uploaded file, and live market and news data have never been fetched in testing.",
+   "Inputs can come from different dates or different price snapshots; their as-of dates are reported but not reconciled."
+  ]
+ }
+}
